@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSE Assignment 1 (2026) - 100分終極手抄與高清繪圖指南</title>
+  <title>BSE Assignment 1 (2026) - 高清互動工程手繪與滿分解答</title>
   <style>
     :root {
       --primary: #0f172a;
       --secondary: #1e3a8a;
       --accent: #2563eb;
+      --accent-light: #dbeafe;
       --text: #334155;
       --heading: #0f172a;
       --bg: #f8fafc;
@@ -17,56 +18,108 @@
       --danger: #dc2626;
       --success: #16a34a;
       --warning: #d97706;
+      --svg-bg: #ffffff;
+      --svg-stroke: #1e293b;
+      --svg-line: #334155;
     }
+
+    /* 黑白臨摹描線模式 (Tracing Mode) */
+    body.tracing-mode {
+      --bg: #ffffff;
+      --card-bg: #ffffff;
+      --svg-bg: #ffffff;
+      --text: #000000;
+      --heading: #000000;
+      --border: #000000;
+      --accent: #000000;
+      --accent-light: #ffffff;
+    }
+    body.tracing-mode svg path,
+    body.tracing-mode svg line,
+    body.tracing-mode svg rect,
+    body.tracing-mode svg ellipse,
+    body.tracing-mode svg circle,
+    body.tracing-mode svg polygon {
+      stroke: #000000 !important;
+      fill: none !important;
+      stroke-width: 2px !important;
+    }
+    body.tracing-mode svg text {
+      fill: #000000 !important;
+      font-weight: 700 !important;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 20px;
+      padding: 16px;
+      transition: background 0.2s ease;
     }
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1140px; margin: 0 auto; }
+    
     header {
       background: linear-gradient(135deg, #1e3a8a, #0f172a);
       color: #ffffff;
-      padding: 26px 30px;
+      padding: 24px 28px;
       border-radius: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-    header h1 { font-size: 1.7rem; margin-bottom: 6px; }
-    header p { opacity: 0.9; font-size: 0.95rem; }
-    .badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-top: 10px;
-    }
-    .tabs {
+    header h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    header p { opacity: 0.9; font-size: 0.9rem; }
+
+    .header-controls {
       display: flex;
       gap: 10px;
+      align-items: center;
+    }
+    .btn-toggle-trace {
+      background: #f59e0b;
+      color: #000;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-toggle-trace:hover { background: #d97706; color: #fff; }
+
+    /* Sticky Tab Bar */
+    .tabs {
+      display: flex;
+      gap: 8px;
       margin-bottom: 20px;
       position: sticky;
       top: 10px;
       z-index: 100;
+      background: var(--bg);
+      padding: 6px 0;
     }
     .tab-btn {
       flex: 1;
-      padding: 12px 18px;
+      padding: 12px 14px;
       background: #e2e8f0;
       border: 1px solid var(--border);
       border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-weight: 700;
+      font-size: 0.92rem;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
       color: #475569;
+      text-align: center;
     }
     .tab-btn.active {
       background: var(--secondary);
@@ -74,13 +127,15 @@
       border-color: var(--secondary);
       box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.3);
     }
+
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 26px;
+      padding: 24px;
       margin-bottom: 24px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
@@ -101,12 +156,13 @@
       color: var(--accent);
       padding: 4px 10px;
       border-radius: 6px;
-      font-weight: 600;
       border: 1px solid #bfdbfe;
     }
+
     h3 { font-size: 1.05rem; color: var(--heading); margin: 16px 0 8px 0; }
     p, li { margin-bottom: 8px; font-size: 0.93rem; }
     ul, ol { padding-left: 22px; }
+
     .formula {
       font-family: inherit;
       font-weight: 600;
@@ -118,30 +174,126 @@
       margin: 4px 0;
       border: 1px solid #e2e8f0;
     }
-    .ref-tag {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #bfdbfe;
+
+    /* Diagram Canvas Container */
+    .diagram-panel {
+      background: var(--svg-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 18px 0;
+      position: relative;
+    }
+    .diagram-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 8px;
+    }
+    .diagram-title { font-weight: 700; font-size: 0.95rem; color: var(--heading); }
+    .btn-zoom {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
       padding: 4px 10px;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      cursor: pointer;
       font-weight: 600;
-      display: inline-block;
-      margin-bottom: 10px;
     }
-    .step-box {
+    .btn-zoom:hover { background: #e2e8f0; }
+
+    .svg-container {
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      background: var(--svg-bg);
+      cursor: zoom-in;
+    }
+    svg { max-width: 100%; height: auto; display: block; }
+
+    /* Interactive Legend */
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .legend-item {
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 6px;
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-left: 4px solid var(--accent);
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin: 12px 0;
-      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s;
     }
-    .step-box strong { color: #0f172a; }
+    .legend-item:hover, .legend-item.highlighted {
+      background: #dbeafe;
+      border-color: #3b82f6;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    /* Fullscreen Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      width: 95vw;
+      max-width: 1100px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    .modal-bar {
+      padding: 12px 20px;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-close {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .modal-body {
+      padding: 20px;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+    }
+    .modal-body svg {
+      width: 100%;
+      max-height: 75vh;
+    }
+
     .alert-box {
       background: #fef2f2;
-      border: 1px solid #fecaca;
       border-left: 4px solid var(--danger);
       padding: 12px 16px;
       border-radius: 6px;
@@ -151,7 +303,6 @@
     }
     .explain-box {
       background: #f0fdf4;
-      border: 1px solid #bbf7d0;
       border-left: 4px solid var(--success);
       padding: 12px 16px;
       border-radius: 6px;
@@ -159,61 +310,31 @@
       font-size: 0.9rem;
       color: #166534;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 14px 0;
-      font-size: 0.88rem;
-    }
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      text-align: left;
-    }
-    th { background: #f1f5f9; color: #1e293b; font-weight: 600; }
-    .diagram-container {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px;
-      margin: 16px 0;
-      text-align: center;
-    }
-    .diagram-caption {
-      margin-top: 10px;
-      font-size: 0.88rem;
-      color: #334155;
-      font-weight: 700;
-    }
-    .legend-table {
-      margin-top: 12px;
-      font-size: 0.85rem;
-    }
-    .legend-table th { background: #f8fafc; }
-    @media print {
-      body { background: #fff; padding: 0; }
-      .tabs { display: none; }
-      .tab-content { display: block !important; }
-      .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
-    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <header>
-    <h1>PDEEEng Y1 — BSE Assignment ONE (September 2026)</h1>
-    <p>Space Heating, Energy Recovery & Psychrometrics | 100分滿分標準・高清手繪圖與防扣分指南</p>
-    <div class="badge">無代碼亂碼・全抄筆記原文・對照 L01 至 L03 原圖</div>
+    <div>
+      <h1>PDEEEng Y1 — BSE Assignment ONE</h1>
+      <p>Space Heating, Energy Recovery & Psychrometrics | 高清工程繪圖與手抄標準</p>
+    </div>
+    <div class="header-controls">
+      <button class="btn-toggle-trace" onclick="toggleTracingMode()">
+        ✏️ 切換「黑白臨摹描線模式」
+      </button>
+    </div>
   </header>
 
+  <!-- Sticky Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('tab-en')">✍️ 英文手抄答案（純文本・照抄即交）</button>
-    <button class="tab-btn" onclick="showTab('tab-diag')">📐 高清手繪圖樣板＋畫圖步驟＋Legend</button>
-    <button class="tab-btn" onclick="showTab('tab-cn')">💡 術語大白話解釋＋避坑清單</button>
+    <button class="tab-btn active" onclick="showTab('tab-en')">✍️ 英文手抄答案 (Text Sheet)</button>
+    <button class="tab-btn" onclick="showTab('tab-diag')">📐 高清手繪工程圖庫 (Diagrams)</button>
+    <button class="tab-btn" onclick="showTab('tab-cn')">💡 中文速讀與避坑對照 (Study)</button>
   </div>
 
-  <!-- TAB 1: ENGLISH SUBMISSION SCRIPT -->
+  <!-- ==================== TAB 1: 英文手抄答案 ==================== -->
   <div id="tab-en" class="tab-content active">
 
     <!-- Q1 -->
@@ -225,7 +346,7 @@
 
       <h3>1. Steam Heating System & Gravity Return</h3>
       <p>A steam heating system supplies heat to a space by connecting a source of steam through piping to heat-emitting equipment (radiators) in the space. The steam gives up its heat in the radiators and condenses into water (condensate).</p>
-      <p>In a gravity return system, steam rises by buoyancy and condensate drains back to the boiler by gravity alone <strong>without any mechanical pump</strong>.</p>
+      <p>In a gravity return system, steam rises by natural buoyancy while condensate flows back to the boiler by gravity alone <strong>without any mechanical pump</strong>.</p>
 
       <h3>2. System Classification</h3>
       <p>There are <strong>two (2) common designs</strong> of low-pressure steam systems based on gravity return:</p>
@@ -241,14 +362,14 @@
 
       <h3>3. Operating Principles</h3>
       <ul>
-        <li><strong>Single-pipe gravity return system:</strong> A single pipe serves both steam supply and condensate return. Steam travels along the top of the pitched pipe while condensate drains back along the bottom in the opposite direction. Air vents must be installed at radiators and the end of the steam main to discharge trapped air.</li>
-        <li><strong>2-pipe gravity return system:</strong> Steam supply and condensate return are separated into two distinct mains. Radiators are connected in parallel; each unit receives steam via a supply riser and discharges condensate through a return drop. In a wet return, a check valve is provided near the boiler to prevent boiler water backflow.</li>
+        <li><strong>Single-pipe gravity return system:</strong> A single pipe serves both steam supply and condensate return. Steam travels along the upper section of the pitched main, while condensate drains back along the bottom in the opposite direction. Automatic air vents are installed on radiators and at the end of the main to eliminate air binding.</li>
+        <li><strong>2-pipe gravity return system:</strong> Steam supply and condensate return are separated into two distinct pipe circuits. Radiators are connected in parallel; each unit receives steam through a supply riser and discharges condensate through a return drop. In a wet return, a check valve is installed near the boiler to prevent boiler water backflow.</li>
       </ul>
 
       <h3>4. Advantages & Disadvantages of Steam Systems</h3>
       <ul>
-        <li><strong>Advantages:</strong> High heat carrying capacity (sensible and latent heat); suitable for long-distance transport; lower running cost due to large-scale production.</li>
-        <li><strong>Disadvantages:</strong> Disposal of condensate and elimination of air from lengthy pipelines are the two major problems.</li>
+        <li><strong>Advantages:</strong> Higher heat carrying capacity (sensible and latent heat); suitable for long-distance transport; lower running cost due to large-scale production.</li>
+        <li><strong>Disadvantages:</strong> Condensate disposal and air elimination from lengthy pipelines are the two major problems.</li>
       </ul>
     </div>
 
@@ -261,22 +382,22 @@
 
       <h3>1. Concepts of Energy Conservation</h3>
       <ul>
-        <li><strong>Energy Saving:</strong> Using more efficient equipment and methods to limit the amounts of energy used. Examples: high-efficiency motors, fans, and pumps; chillers of higher COP; building envelopes with better thermal insulation.</li>
+        <li><strong>Energy Saving:</strong> Using more efficient methods and equipment to limit the amounts of energy used. Examples: high-efficiency motors, fans, and pumps; chillers of higher COP; building envelopes with better thermal insulation.</li>
         <li><strong>Energy Recovery:</strong> Capturing waste heat produced by systems and putting it to other uses. Examples: heat pipe heat exchangers, enthalpy wheels, run-around coils, heat reclaim condensers, and heat pumps.</li>
       </ul>
 
-      <h3>2. Device 1: Heat Pipe Heat Exchanger</h3>
+      <h3>2. Device 1: Heat Pipe Heat Exchanger (Gas-to-Gas)</h3>
       <ul>
-        <li><strong>Appearance & Construction (3-D):</strong> A rectangular casing housing an array of individual, permanently sealed finned tubes. A sealed partition plate separates the hot exhaust air stream and cold supply air stream in a counterflow arrangement, completely preventing cross-contamination.</li>
-        <li><strong>Working Principle:</strong> Operates on a closed-loop evaporation/condensation cycle. Heat from the hot exhaust vaporizes the liquid inside the pipe; higher vapour pressure drives vapour to the cooler end, where it condenses and releases latent heat to the cold supply air. Condensate returns via an internal capillary wick and gravity. No moving parts and no external power required.</li>
+        <li><strong>Appearance & Construction (3-D):</strong> A rectangular casing housing an array of individual, permanently sealed finned tubes. A sealed partition plate separates the counterflow exhaust and supply air streams, completely preventing cross-contamination.</li>
+        <li><strong>Working Principle:</strong> Operates on a closed-loop evaporation/condensation cycle. Thermal energy from the hot exhaust vaporizes fluid at the hot end; vapour migrates to the cooler end, condenses, and releases latent heat to the cold incoming air. Liquid returns via an internal capillary wick and gravity. No moving parts and no external power required.</li>
         <li><strong>Factors Affecting Capacity:</strong> Wick design, tube diameter (15–50 mm), working fluid properties, temperature difference, and inclination tilt angle.</li>
         <li><strong>Disadvantage:</strong> Transfers sensible heat only; cannot recover latent heat.</li>
       </ul>
 
       <h3>3. Device 2: Enthalpy Wheel (Heat Wheel)</h3>
       <ul>
-        <li><strong>Appearance & Construction (3-D):</strong> Consists of a slowly rotating porous wheel fabricated from heat-and-moisture absorbing materials (honeycomb structure), a drive motor, casing, air seals, and counterflow supply/exhaust ductwork.</li>
-        <li><strong>Working Principle:</strong> The wheel rotates slowly between the exhaust air stream and outdoor supply air stream. In winter, sensible heat and moisture from the warm exhaust air are picked up and stored by the wheel matrix, then transferred to the cold dry incoming supply air as the wheel rotates through it. Regeneration is continuous.</li>
+        <li><strong>Appearance & Construction (3-D):</strong> Consists of a slowly rotating porous wheel packed with heat-and-moisture absorbing honeycomb matrix, drive mechanism, casing, air seals, and counterflow ductwork.</li>
+        <li><strong>Working Principle:</strong> The wheel rotates slowly between the exhaust and supply air streams. In winter, sensible heat and latent heat (moisture) from the warm exhaust air are picked up by the matrix, then transferred to the cold incoming fresh air as the wheel rotates through it. Regeneration is continuous.</li>
         <li><strong>Efficiency & Merits:</strong> Recovers <strong>70% to 90%</strong> of exhaust energy, transferring both sensible and latent heat.</li>
         <li><strong>Disadvantages:</strong> Bulky cross-section (2×2 m to 5×5 m); complex ductwork arrangement; requires routine maintenance; slight risk of cross-contamination (minimized by purge units).</li>
       </ul>
@@ -290,36 +411,29 @@
       </div>
 
       <h3>1. Dalton's Law</h3>
-      <p>Dalton's law states that the total pressure of a gas mixture is equal to the sum of the partial pressures of the elements in the mixture which occupies a given volume at a given temperature:</p>
+      <p>Dalton's law states that the total pressure of a gas mixture equals the sum of the partial pressures of the individual elements occupying the same volume at the same temperature:</p>
       <div class="formula">P<sub>m</sub> = P<sub>1</sub> + P<sub>2</sub> + P<sub>3</sub> + ... + P<sub>n</sub></div>
-      <p>Applying Dalton's law to moist air (mixture of dry air and water vapour):</p>
+      <p>Applying Dalton's law to moist air (dry air + water vapour):</p>
       <div class="formula">P<sub>at</sub> = P<sub>a</sub> + P<sub>w</sub></div>
-      <p>where: <br>
-      P<sub>at</sub> = atmospheric pressure of moist air (Pa)<br>
-      P<sub>a</sub> = partial pressure of dry air (Pa)<br>
-      P<sub>w</sub> = partial pressure of water vapour (Pa)</p>
+      <p>where: P<sub>at</sub> = atmospheric pressure of moist air, P<sub>a</sub> = partial pressure of dry air, and P<sub>w</sub> = partial pressure of water vapour.</p>
 
       <h3>2. Eleven (11) Properties of Moist Air</h3>
       <ol>
-        <li><strong>Humidity ratio (w):</strong> Ratio between the mass of water vapour m<sub>w</sub> and mass of dry air m<sub>a</sub>:
+        <li><strong>Humidity ratio (w):</strong> Ratio between mass of water vapour m<sub>w</sub> and dry air m<sub>a</sub>:
           <div class="formula">w = m<sub>w</sub> / m<sub>a</sub> = 0.62198 · P<sub>w</sub> / (P<sub>at</sub> - P<sub>w</sub>) &nbsp; [kg/kg da]</div>
         </li>
-        <li><strong>Dry bulb temperature (t):</strong> Temperature of moist air measured by a standard thermometer (°C).</li>
-        <li><strong>Wet bulb temperature (t*):</strong> Temperature measured by a thermometer wrapped in a wetted wick exposed to an air current of 1–2 m/s (°C).</li>
-        <li><strong>Dew point temperature (t<sub>d</sub>):</strong> Temperature at which condensation of moisture begins at constant pressure and humidity ratio (°C).</li>
+        <li><strong>Dry bulb temperature (t):</strong> Moist air temperature measured by a standard thermometer (°C).</li>
+        <li><strong>Wet bulb temperature (t*):</strong> Measured by a thermometer wrapped in a wetted wick with 1–2 m/s air velocity (°C).</li>
+        <li><strong>Dew point temperature (t<sub>d</sub>):</strong> Temperature at which condensation of moisture begins (°C).</li>
         <li><strong>Moisture content:</strong> Weight of water vapour in kg per kg of dry air (kg/kg da).</li>
-        <li><strong>Relative humidity (&phi;):</strong> Ratio of actual water vapour partial pressure to saturated water vapour pressure at the same temperature (%).</li>
+        <li><strong>Relative humidity (&phi;):</strong> Ratio of actual water vapour partial pressure to saturated vapour pressure at the same temperature (%).</li>
         <li><strong>Degree of saturation (&mu;):</strong> Ratio of humidity ratio w to saturated humidity ratio w<sub>s</sub> at the same temperature and pressure (&mu; = w / w<sub>s</sub>).</li>
         <li><strong>Specific volume (v):</strong> Volume of moist air in m<sup>3</sup> per kg of dry air (m<sup>3</sup>/kg da).</li>
-        <li><strong>Enthalpy (h):</strong> Amount of heat in moist air above an arbitrary datum (-17.8°C for dry air, 0°C water for vapour):
+        <li><strong>Enthalpy (h):</strong> Amount of heat in moist air above datum (-17.8°C for dry air, 0°C water for vapour):
           <div class="formula">h = 1.005 t + w(2501 + 1.87 t) &nbsp; [kJ/kg]</div>
         </li>
-        <li><strong>Sensible Heat Ratio (SHR):</strong> Ratio of sensible heat to total heat:
-          <div class="formula">SHR = Sensible Heat / (Sensible Heat + Latent Heat)</div>
-        </li>
-        <li><strong>Room Sensible Heat Ratio (RSHR):</strong>
-          <div class="formula">RSHR = Room Sensible Heat / (Room Sensible Heat + Room Latent Heat)</div>
-        </li>
+        <li><strong>Sensible Heat Ratio (SHR):</strong> Sensible Heat / (Sensible Heat + Latent Heat).</li>
+        <li><strong>Room Sensible Heat Ratio (RSHR):</strong> Room Sensible / (Room Sensible + Room Latent Heat).</li>
       </ol>
 
       <h3>3. Six (6) Thermodynamic Properties on Psychrometric Chart</h3>
@@ -356,432 +470,399 @@
       <h3>2. The Five (5) Air Conditioning Processes</h3>
       
       <p><strong>(1) Cooling vs. Dehumidification (Cooling + Dehumidification)</strong><br>
-      Sensible cooling alone is represented by a horizontal line moving left (w constant), whereas pure dehumidification is a vertical downward line (t constant). In practical cooling coil operation, air is cooled below its dew point (T<sub>d</sub>); therefore sensible cooling and dehumidification occur simultaneously. Dry bulb temperature (t), moisture content (w), and enthalpy (h) are all reduced.<br>
+      Sensible cooling alone is a horizontal line moving left (w constant), whereas pure dehumidification is a vertical downward line (t constant). In practical operation, air passes over a cooling coil with surface temperature below entering dew point (T<sub>d</sub>); hence sensible cooling and dehumidification occur simultaneously. t, w, and h all decrease.<br>
       <em>Line on Chart:</em> Straight line sloping <strong>downwards and to the left (1 &rarr; 2)</strong> towards the saturation curve.</p>
 
       <p><strong>(2) Heating vs. Humidification (Heating + Humidification)</strong><br>
-      Sensible heating alone is a horizontal line moving right (w constant, t and h increase). Humidification adds moisture to the air stream. In a combined heating and humidification process, air is first heated sensibly from T<sub>1</sub> to T<sub>2</sub> (1 &rarr; 2), then humidified via steam or water spray (2 &rarr; 3). Spray chamber effectiveness: E = (h<sub>3</sub> - h<sub>2</sub>) / (h<sub>s</sub> - h<sub>2</sub>).<br>
+      Sensible heating alone is a horizontal line moving right (w constant, t and h increase). Humidification adds moisture. In the combined process, air is first heated sensibly from T<sub>1</sub> to T<sub>2</sub> (1 &rarr; 2), then humidified via steam or water spray (2 &rarr; 3). Effectiveness: E = (h<sub>3</sub> - h<sub>2</sub>) / (h<sub>s</sub> - h<sub>2</sub>).<br>
       <em>Line on Chart:</em> 1 &rarr; 2 is <strong>horizontal to the right</strong>; 2 &rarr; 3 slopes <strong>upwards and to the left</strong> towards saturation.</p>
 
       <p><strong>(3) Cooling + Dehumidification + Reheat</strong><br>
-      Air is first cooled and dehumidified below its dew point (1 &rarr; 2) to remove excess moisture, and then sensibly reheated (2 &rarr; 3) to a comfortable supply air temperature without changing moisture content. This avoids overcooling while maintaining comfort room humidity.<br>
+      Air is first cooled and dehumidified below dew point (1 &rarr; 2) to remove moisture, and then sensibly reheated (2 &rarr; 3) to comfort supply temperature without adding moisture. Prevents space overcooling.<br>
       <em>Line on Chart:</em> 1 &rarr; 2 slopes <strong>downwards and to the left</strong>; 2 &rarr; 3 is <strong>strictly horizontal to the right</strong> (w constant).</p>
 
       <p><strong>(4) Evaporative Cooling</strong><br>
-      Simultaneous removal of sensible heat and addition of moisture. The recirculated spray water remains at constant temperature along the wet-bulb temperature line without external heat addition or extraction (also called "Ideal Adiabatic Saturation Process").<br>
-      <em>Line on Chart:</em> Moves <strong>upwards and to the left along the constant wet-bulb / enthalpy line (1 &rarr; 2)</strong> towards the saturation curve (t decreases, w increases).</p>
+      Simultaneous removal of sensible heat and addition of moisture along constant wet-bulb temperature line without external heat addition or removal (Ideal Adiabatic Saturation Process).<br>
+      <em>Line on Chart:</em> Moves <strong>upwards and to the left along constant wet-bulb line (1 &rarr; 2)</strong> towards saturation (t decreases, w increases).</p>
 
       <p><strong>(5) Air Mixing Process</strong><br>
-      Return air (1) and outdoor fresh air (o) mix adiabatically in the mixing chamber of the AHU. The resulting mixing point (m) always lies on the straight line connecting 1 and o.<br>
-      <span class="formula">% of re-circulation air = x / y</span> &nbsp; | &nbsp; 
+      Return air (1) and outdoor fresh air (o) mix adiabatically in the AHU mixing chamber. The mixture point (m) always lies on the straight line connecting 1 and o.<br>
+      <span class="formula">% of re-circulation air = x / y</span> &nbsp;|&nbsp; 
       <span class="formula">% of outdoor air = (y - x) / y</span><br>
-      <em>Line on Chart:</em> A <strong>straight line joining point 1 and point o</strong>, with mixing point m located on the line segment.</p>
+      <em>Line on Chart:</em> A <strong>straight line joining point 1 and point o</strong>, with mixing point m on the segment.</p>
     </div>
 
   </div>
 
-  <!-- TAB 2: DIAGRAM SAMPLES WITH LABELS & LEGENDS -->
+  <!-- ==================== TAB 2: 高清手繪工程圖庫 ==================== -->
   <div id="tab-diag" class="tab-content">
 
-    <!-- Q1 DIAGRAMS -->
+    <!-- FIG 1.1 -->
     <div class="card">
-      <div class="card-title">📐 Question 1 蒸氣供暖手繪圖樣板（對照 L01 原圖）</div>
-      
-      <!-- FIG 1.1 -->
-      <div class="ref-tag">📖 官方出處：Lecture 1 第 11 頁 Figure 3</div>
-      <div class="step-box">
-        <strong>✏️ Figure 1.1 徒手畫圖 3 步法：</strong><br>
-        1. 用間尺在左下角畫一個長方形代表 <strong>BOILER</strong>，中間劃虛線寫 <strong>WATER LINE</strong>。<br>
-        2. 從鍋爐頂拉出一條向右微斜向上的直線作為 <strong>STEAM MAIN</strong>，分出兩條支管駁去上方的兩個長方形（<strong>Radiators</strong>）。<br>
-        3. 散熱器頂部及主管最右端畫小圓圈標註 <strong>Air Vent</strong>。在主管內畫兩個相反方向的箭頭：上方標「Steam &rarr;」，下方標「&larr; Condensate」。
-      </div>
+      <div class="diagram-panel">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 1.1 — Single-pipe Gravity Return System (單管重力回水)</span>
+          <button class="btn-zoom" onclick="openModal('svg-fig11', 'Figure 1.1 — Single-pipe Gravity Return')">🔍 點擊全螢幕放大</button>
+        </div>
+        <div class="svg-container" onclick="openModal('svg-fig11', 'Figure 1.1 — Single-pipe Gravity Return')">
+          <svg id="svg-fig11" viewBox="0 0 800 300" width="100%" height="300">
+            <defs>
+              <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e3a8a"/>
+              </marker>
+              <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+              </marker>
+            </defs>
+            <!-- Boiler -->
+            <rect id="comp-boiler1" x="50" y="140" width="150" height="130" fill="#f8fafc" stroke="#1e293b" stroke-width="2.5" rx="4"/>
+            <text x="125" y="190" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">BOILER</text>
+            <line x1="50" y1="215" x2="200" y2="215" stroke="#0284c7" stroke-dasharray="5,4" stroke-width="2.5"/>
+            <text x="125" y="235" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">WATER LINE</text>
 
-      <div class="diagram-container">
-        <svg viewBox="0 0 760 270" width="100%" height="270">
-          <defs>
-            <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e3a8a"/>
-            </marker>
-            <marker id="arr-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
-            </marker>
-          </defs>
+            <!-- Steam Main (sloped) -->
+            <path id="comp-main1" d="M 140 140 L 140 75 L 720 75" fill="none" stroke="#1e293b" stroke-width="3.5"/>
+            <text x="440" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">STEAM MAIN (Single Pipe Circuit with fall)</text>
 
-          <!-- Boiler -->
-          <rect x="40" y="120" width="140" height="110" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
-          <text x="110" y="165" text-anchor="middle" font-size="14" font-weight="bold">BOILER</text>
-          <line x1="40" y1="185" x2="180" y2="185" stroke="#0284c7" stroke-dasharray="4" stroke-width="2"/>
-          <text x="110" y="205" text-anchor="middle" font-size="11" fill="#0284c7">WATER LINE</text>
+            <!-- Internal Flow Arrows -->
+            <line x1="180" y1="70" x2="250" y2="70" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow-blue)"/>
+            <text x="295" y="73" font-size="11" font-weight="bold" fill="#1e3a8a">Steam &rarr;</text>
+            <line x1="250" y1="82" x2="180" y2="82" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+            <text x="295" y="93" font-size="11" font-weight="bold" fill="#dc2626">&larr; Condensate</text>
 
-          <!-- Steam Main (Sloped) -->
-          <path d="M 130 120 L 130 70 L 680 70" fill="none" stroke="#1e293b" stroke-width="3"/>
-          <text x="420" y="58" text-anchor="middle" font-size="12" font-weight="bold">STEAM MAIN (Single Pipe Circuit with fall)</text>
+            <!-- Radiator A -->
+            <g id="comp-radA">
+              <rect x="340" y="20" width="70" height="40" fill="#e2e8f0" stroke="#1e293b" stroke-width="2" rx="2"/>
+              <text x="375" y="45" text-anchor="middle" font-size="12" font-weight="bold">Rad A</text>
+              <line x1="375" y1="60" x2="375" y2="75" stroke="#1e293b" stroke-width="2.5"/>
+              <circle cx="375" cy="18" r="4.5" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+              <text x="375" y="9" text-anchor="middle" font-size="10" font-weight="bold">Air Vent</text>
+            </g>
 
-          <!-- Flow Arrows -->
-          <line x1="170" y1="65" x2="230" y2="65" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arr)"/>
-          <text x="270" y="68" font-size="11" fill="#1e3a8a">Steam &rarr;</text>
-          <line x1="230" y1="75" x2="170" y2="75" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)"/>
-          <text x="270" y="87" font-size="11" fill="#dc2626">&larr; Condensate</text>
+            <!-- Radiator B -->
+            <g id="comp-radB">
+              <rect x="530" y="20" width="70" height="40" fill="#e2e8f0" stroke="#1e293b" stroke-width="2" rx="2"/>
+              <text x="565" y="45" text-anchor="middle" font-size="12" font-weight="bold">Rad B</text>
+              <line x1="565" y1="60" x2="565" y2="75" stroke="#1e293b" stroke-width="2.5"/>
+              <circle cx="565" cy="18" r="4.5" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+              <text x="565" y="9" text-anchor="middle" font-size="10" font-weight="bold">Air Vent</text>
+            </g>
 
-          <!-- Radiator 1 -->
-          <g transform="translate(320, 20)">
-            <rect width="60" height="35" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.5"/>
-            <text x="30" y="22" text-anchor="middle" font-size="11">Rad A</text>
-            <line x1="30" y1="35" x2="30" y2="50" stroke="#1e293b" stroke-width="2"/>
-            <circle cx="30" cy="0" r="4" fill="#64748b"/>
-            <text x="30" y="-6" text-anchor="middle" font-size="9">Air Vent</text>
-          </g>
+            <!-- End Air Vent -->
+            <circle cx="720" cy="75" r="5" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+            <text x="720" y="58" text-anchor="middle" font-size="11" font-weight="bold">End Air Vent</text>
 
-          <!-- Radiator 2 -->
-          <g transform="translate(500, 20)">
-            <rect width="60" height="35" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.5"/>
-            <text x="30" y="22" text-anchor="middle" font-size="11">Rad B</text>
-            <line x1="30" y1="35" x2="30" y2="50" stroke="#1e293b" stroke-width="2"/>
-            <circle cx="30" cy="0" r="4" fill="#64748b"/>
-            <text x="30" y="-6" text-anchor="middle" font-size="9">Air Vent</text>
-          </g>
-
-          <!-- End Air Vent -->
-          <circle cx="680" cy="70" r="5" fill="#64748b"/>
-          <text x="680" y="55" text-anchor="middle" font-size="10">End Air Vent</text>
-
-          <!-- Legend Box -->
-          <rect x="520" y="130" width="200" height="100" fill="#fafafa" stroke="#cbd5e1"/>
-          <text x="530" y="148" font-size="11" font-weight="bold">LEGEND</text>
-          <text x="530" y="168" font-size="10">1. Boiler & Burner</text>
-          <text x="530" y="184" font-size="10">2. Water Line</text>
-          <text x="530" y="200" font-size="10">3. Single Steam Main (with fall)</text>
-          <text x="530" y="216" font-size="10">4. Radiators & Air Vents</text>
-        </svg>
-        <div class="diagram-caption">Figure 1.1 — Single-pipe Gravity Return Low-Pressure Steam System</div>
-      </div>
-
-      <!-- FIG 1.2 -->
-      <div class="ref-tag">📖 官方出處：Lecture 1 第 12 頁 Figure 4</div>
-      <div class="step-box">
-        <strong>✏️ Figure 1.2 徒手畫圖 3 步法：</strong><br>
-        1. 鍋爐與水位線畫法相同。<br>
-        2. 上面畫一條供氣主管（<strong>Steam Supply Main</strong>），分支進入散熱器。<br>
-        3. 下面分開畫兩條回水管：在水位線之上的劃虛線標註 <strong>DRY RETURN</strong>；在水位線之下的劃實線標註 <strong>WET RETURN</strong>。在 Wet return 靠近鍋爐位置畫一個三角形單向閥符號（<strong>Check Valve</strong>），<strong>切勿畫水泵！</strong>
-      </div>
-
-      <div class="diagram-container">
-        <svg viewBox="0 0 760 280" width="100%" height="280">
-          <!-- Boiler -->
-          <rect x="40" y="120" width="140" height="130" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
-          <text x="110" y="165" text-anchor="middle" font-size="14" font-weight="bold">BOILER</text>
-          <line x1="40" y1="180" x2="180" y2="180" stroke="#0284c7" stroke-dasharray="4" stroke-width="2"/>
-          <text x="110" y="200" text-anchor="middle" font-size="11" fill="#0284c7">WATER LINE</text>
-
-          <!-- Steam Main -->
-          <path d="M 130 120 L 130 50 L 680 50" fill="none" stroke="#1e293b" stroke-width="3"/>
-          <text x="400" y="42" text-anchor="middle" font-size="11" font-weight="bold">STEAM SUPPLY MAIN</text>
-
-          <!-- Dry Return -->
-          <path d="M 680 145 L 180 145" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="4"/>
-          <text x="400" y="138" text-anchor="middle" font-size="11" fill="#059669" font-weight="bold">DRY RETURN (Above Boiler Water Level)</text>
-
-          <!-- Wet Return -->
-          <path d="M 680 220 L 180 220" fill="none" stroke="#0284c7" stroke-width="2.5"/>
-          <text x="400" y="238" text-anchor="middle" font-size="11" fill="#0284c7" font-weight="bold">WET RETURN (Below Boiler Water Level)</text>
-
-          <!-- Check valve & Drain on Wet Return -->
-          <polygon points="220,215 232,220 220,225" fill="#1e293b"/>
-          <line x1="232" y1="214" x2="232" y2="226" stroke="#1e293b" stroke-width="2"/>
-          <text x="226" y="248" text-anchor="middle" font-size="9">Check Valve</text>
-
-          <!-- Radiators -->
-          <g transform="translate(300, 65)">
-            <rect width="60" height="35" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.5"/>
-            <text x="30" y="22" text-anchor="middle" font-size="11">Rad 1</text>
-            <line x1="15" y1="-15" x2="15" y2="0" stroke="#1e293b" stroke-width="2"/>
-            <line x1="45" y1="35" x2="45" y2="155" stroke="#1e293b" stroke-width="2"/>
-          </g>
-
-          <g transform="translate(520, 65)">
-            <rect width="60" height="35" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.5"/>
-            <text x="30" y="22" text-anchor="middle" font-size="11">Rad 2</text>
-            <line x1="15" y1="-15" x2="15" y2="0" stroke="#1e293b" stroke-width="2"/>
-            <line x1="45" y1="35" x2="45" y2="155" stroke="#1e293b" stroke-width="2"/>
-          </g>
-
-          <!-- Legend Box -->
-          <rect x="540" y="125" width="190" height="115" fill="#fafafa" stroke="#cbd5e1"/>
-          <text x="550" y="142" font-size="11" font-weight="bold">LEGEND</text>
-          <text x="550" y="160" font-size="10">1. Steam Supply Main</text>
-          <text x="550" y="176" font-size="10">2. Dry Return (Above line)</text>
-          <text x="550" y="192" font-size="10">3. Wet Return (Below line)</text>
-          <text x="550" y="208" font-size="10">4. Check Valve (No pump!)</text>
-          <text x="550" y="224" font-size="10">5. Air Vents & Radiators</text>
-        </svg>
-        <div class="diagram-caption">Figure 1.2 — 2-pipe Gravity Return Low-Pressure Steam System (Showing Dry and Wet Returns)</div>
+            <!-- Slope indicator -->
+            <text x="440" y="115" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">Pitched downwards back to boiler (Gravity Return — NO Pump)</text>
+          </svg>
+        </div>
+        <div class="legend-grid">
+          <div class="legend-item" onmouseenter="highlight('comp-boiler1')" onmouseleave="unhighlight('comp-boiler1')">① Boiler & Water Line (鍋爐與基準水位)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-main1')" onmouseleave="unhighlight('comp-main1')">② Single Steam Main (斜度單管供汽/回水)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-radA')" onmouseleave="unhighlight('comp-radA')">③ Radiator A & Air Vent (前端散熱器與排氣閥)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-radB')" onmouseleave="unhighlight('comp-radB')">④ Radiator B & Air Vent (末端散熱器與排氣閥)</div>
+        </div>
       </div>
     </div>
 
-    <!-- Q2 DIAGRAMS -->
+    <!-- FIG 1.2 -->
     <div class="card">
-      <div class="card-title">📐 Question 2 節能回收 3-D 軸測立體圖樣板（對照 L01 原圖）</div>
-      
-      <!-- FIG 2.1: HEAT PIPE 3D -->
-      <div class="ref-tag">📖 官方出處：Lecture 1 第 27 頁 Fig. 1（或 L02 第 18 頁）</div>
-      <div class="step-box">
-        <strong>✏️ Figure 2.1 徒手畫圖 3 步法：</strong><br>
-        1. 用直尺畫一個立體的長方體機箱輪廓。<br>
-        2. 正中間畫一塊深色的垂直實心隔板（<strong>Sealed Partition</strong>），橫向穿插畫 2~3 條粗管代表 <strong>Heat Pipes</strong>。<br>
-        3. 左半部畫由上而下的紅色逆流箭頭（Hot exhaust &rarr; Cool exhaust）；右半部畫由下而上的藍色逆流箭頭（Cold supply &rarr; Warm supply）。
-      </div>
+      <div class="diagram-panel">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 1.2 — 2-pipe Gravity Return System (雙管乾/濕回水)</span>
+          <button class="btn-zoom" onclick="openModal('svg-fig12', 'Figure 1.2 — 2-pipe Gravity Return')">🔍 點擊全螢幕放大</button>
+        </div>
+        <div class="svg-container" onclick="openModal('svg-fig12', 'Figure 1.2 — 2-pipe Gravity Return')">
+          <svg id="svg-fig12" viewBox="0 0 800 320" width="100%" height="320">
+            <!-- Boiler -->
+            <rect id="comp-boiler2" x="50" y="130" width="150" height="160" fill="#f8fafc" stroke="#1e293b" stroke-width="2.5" rx="4"/>
+            <text x="125" y="175" text-anchor="middle" font-size="16" font-weight="bold">BOILER</text>
+            <line x1="50" y1="205" x2="200" y2="205" stroke="#0284c7" stroke-dasharray="5,4" stroke-width="2.5"/>
+            <text x="125" y="225" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">WATER LINE</text>
 
-      <div class="diagram-container">
-        <svg viewBox="0 0 760 260" width="100%" height="260">
-          <polygon points="120,60 540,60 640,120 220,120" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
-          <polygon points="120,60 220,120 220,210 120,150" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-          <polygon points="220,120 640,120 640,210 220,210" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+            <!-- Steam Supply Main -->
+            <path id="comp-supply2" d="M 140 130 L 140 50 L 730 50" fill="none" stroke="#1e293b" stroke-width="3.5"/>
+            <text x="440" y="40" text-anchor="middle" font-size="12" font-weight="bold">STEAM SUPPLY MAIN (高位供汽主管)</text>
 
-          <polygon points="380,90 405,105 405,195 380,180" fill="#334155" stroke="#0f172a" stroke-width="2"/>
-          <text x="390" y="78" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f172a">SEALED PARTITION</text>
+            <!-- Dry Return -->
+            <path id="comp-dry2" d="M 730 155 L 200 155" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <text x="440" y="148" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">DRY RETURN (Above Water Line 水位線以上)</text>
 
-          <line x1="170" y1="155" x2="570" y2="155" stroke="#0284c7" stroke-width="4"/>
-          <line x1="190" y1="175" x2="590" y2="175" stroke="#0284c7" stroke-width="4"/>
-          <text x="600" y="170" font-size="11" font-weight="bold" fill="#0284c7">Finned Heat Pipes</text>
+            <!-- Wet Return -->
+            <path id="comp-wet2" d="M 730 255 L 200 255" fill="none" stroke="#0284c7" stroke-width="3"/>
+            <text x="440" y="275" text-anchor="middle" font-size="12" font-weight="bold" fill="#0284c7">WET RETURN (Below Water Line 水位線以下)</text>
 
-          <path d="M 260,35 L 260,180" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-red)"/>
-          <text x="260" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">HOT EXHAUST AIR IN</text>
-          <text x="260" y="200" text-anchor="middle" font-size="11" font-weight="bold" fill="#ea580c">COOL EXHAUST AIR OUT</text>
+            <!-- Check Valve on Wet Return -->
+            <g id="comp-cv2">
+              <polygon points="245,248 260,255 245,262" fill="#1e293b"/>
+              <line x1="260" y1="247" x2="260" y2="263" stroke="#1e293b" stroke-width="2.5"/>
+              <text x="252" y="285" text-anchor="middle" font-size="10" font-weight="bold">Check Valve (止回閥)</text>
+            </g>
 
-          <path d="M 520,230 L 520,75" stroke="#2563eb" stroke-width="3" marker-end="url(#arr)"/>
-          <text x="520" y="245" text-anchor="middle" font-size="11" font-weight="bold" fill="#2563eb">COLD SUPPLY AIR IN</text>
-          <text x="520" y="65" text-anchor="middle" font-size="11" font-weight="bold" fill="#16a34a">WARM SUPPLY AIR OUT</text>
-        </svg>
-        <div class="diagram-caption">Figure 2.1 — 3-D Schematic of Gas-to-Gas Heat Pipe Heat Exchanger (Counterflow Arrangement)</div>
-      </div>
+            <!-- Radiators -->
+            <g id="comp-rads2">
+              <!-- Rad 1 -->
+              <rect x="330" y="70" width="65" height="40" fill="#e2e8f0" stroke="#1e293b" stroke-width="2" rx="2"/>
+              <text x="362" y="95" text-anchor="middle" font-size="11" font-weight="bold">Rad 1</text>
+              <line x1="345" y1="50" x2="345" y2="70" stroke="#1e293b" stroke-width="2"/>
+              <line x1="380" y1="110" x2="380" y2="255" stroke="#1e293b" stroke-width="2"/>
 
-      <!-- FIG 2.2: ENTHALPY WHEEL 3D -->
-      <div class="ref-tag">📖 官方出處：Lecture 1 第 32 頁 Fig. 4（或 L02 第 26 頁）</div>
-      <div class="step-box">
-        <strong>✏️ Figure 2.2 徒手畫圖 3 步法：</strong><br>
-        1. 在中間畫一個立體的傾斜圓柱轉輪（輪盤，中間畫小同心圓表示轉軸，輪面劃密集蜂窩網格）。<br>
-        2. 兩側連接排風風管（上方）與新風風管（下方）。<br>
-        3. 在輪邊畫一個彎曲箭頭標註 <strong>Direction of rotation</strong>，並標出新風與排風的進出流向。
-      </div>
-
-      <div class="diagram-container">
-        <svg viewBox="0 0 760 270" width="100%" height="270">
-          <rect x="80" y="40" width="240" height="70" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
-          <rect x="440" y="40" width="240" height="70" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
-          <line x1="120" y1="75" x2="640" y2="75" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-red)"/>
-          <text x="140" y="65" font-size="11" font-weight="bold" fill="#dc2626">Warm Exhaust Air In</text>
-          <text x="580" y="65" font-size="11" font-weight="bold" fill="#ea580c">Cooled Exhaust Out</text>
-
-          <rect x="80" y="150" width="240" height="70" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3"/>
-          <rect x="440" y="150" width="240" height="70" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3"/>
-          <line x1="640" y1="185" x2="120" y2="185" stroke="#0284c7" stroke-width="3" marker-end="url(#arr)"/>
-          <text x="580" y="175" font-size="11" font-weight="bold" fill="#0284c7">Cold Outside Air In</text>
-          <text x="140" y="175" font-size="11" font-weight="bold" fill="#16a34a">Warmed Supply to Room</text>
-
-          <ellipse cx="380" cy="130" rx="45" ry="95" fill="#f8fafc" stroke="#1e293b" stroke-width="3"/>
-          <ellipse cx="380" cy="130" rx="15" ry="30" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
-          <path d="M 380,35 Q 430,130 380,225" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2"/>
-          
-          <path d="M 345,100 A 30 70 0 0 1 345,160" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#arr)"/>
-          <text x="290" y="135" font-size="10" font-weight="bold" fill="#d97706">Rotation</text>
-          <text x="380" y="245" text-anchor="middle" font-size="11" font-weight="bold">Rotating Honeycomb Matrix (Sensible + Latent)</text>
-        </svg>
-        <div class="diagram-caption">Figure 2.2 — 3-D Schematic of Enthalpy Wheel (Heat Recovery Wheel) in Counterflow Ducts</div>
+              <!-- Rad 2 -->
+              <rect x="560" y="70" width="65" height="40" fill="#e2e8f0" stroke="#1e293b" stroke-width="2" rx="2"/>
+              <text x="592" y="95" text-anchor="middle" font-size="11" font-weight="bold">Rad 2</text>
+              <line x1="575" y1="50" x2="575" y2="70" stroke="#1e293b" stroke-width="2"/>
+              <line x1="610" y1="110" x2="610" y2="255" stroke="#1e293b" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="legend-grid">
+          <div class="legend-item" onmouseenter="highlight('comp-supply2')" onmouseleave="unhighlight('comp-supply2')">① Steam Supply Main (供汽主管)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-dry2')" onmouseleave="unhighlight('comp-dry2')">② Dry Return (乾式回水管，高於水位)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-wet2')" onmouseleave="unhighlight('comp-wet2')">③ Wet Return (濕式回水管，浸於水位下)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-cv2')" onmouseleave="unhighlight('comp-cv2')">④ Check Valve (單向止回閥，防止水倒流)</div>
+        </div>
       </div>
     </div>
 
-    <!-- Q3 DIAGRAMS -->
+    <!-- FIG 2.1 & 2.2 -->
     <div class="card">
-      <div class="card-title">📐 Question 3 氣體定律與濕度圖骨架樣板（對照 L03 原圖）</div>
-      
-      <div class="ref-tag">📖 官方出處：Diagram (a) 出自 L03 第 4 頁；Diagram (b) 出自 L03 第 11 頁 Fig. 1-2</div>
-      <div class="step-box">
-        <strong>✏️ Figure 3 徒手畫圖 3 步法：</strong><br>
-        1. <strong>Diagram (a)</strong>：畫一個密閉氣缸，頂部畫活塞。裡面散佈黑點（Pa 乾空氣）與空心點（Pw 水蒸氣），底部寫核心公式 <strong>Pat = Pa + Pw</strong>。<br>
-        2. <strong>Diagram (b)</strong>：畫一個標準坐標軸，左邊畫一條向上揚的飽和曲線（<strong>Saturation Curve, 100% RH</strong>）。<br>
-        3. 用間尺引出 6 條坐標特徵線並標註名稱：底軸乾球溫度、豎軸水分含量、向右下斜的濕球線、向左上斜的焓線、陡斜的比容線、向上彎的相對濕度弧線。
-      </div>
+      <div class="diagram-panel">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 2.1 — Heat Pipe Heat Exchanger 3-D View (熱管換熱器)</span>
+          <button class="btn-zoom" onclick="openModal('svg-fig21', 'Figure 2.1 — Heat Pipe 3-D')">🔍 全螢幕放大</button>
+        </div>
+        <div class="svg-container" onclick="openModal('svg-fig21', 'Figure 2.1 — Heat Pipe 3-D')">
+          <svg id="svg-fig21" viewBox="0 0 800 280" width="100%" height="280">
+            <!-- 3D Casing Box -->
+            <polygon points="120,60 560,60 660,130 220,130" fill="#f8fafc" stroke="#64748b" stroke-width="1.8"/>
+            <polygon points="120,60 220,130 220,230 120,160" fill="#e2e8f0" stroke="#64748b" stroke-width="1.8"/>
+            <polygon points="220,130 660,130 660,230 220,230" fill="#f1f5f9" stroke="#64748b" stroke-width="1.8"/>
 
-      <div class="diagram-container">
-        <svg viewBox="0 0 760 260" width="100%" height="260">
-          <!-- DIAGRAM (a) -->
-          <g transform="translate(30, 20)">
-            <rect x="0" y="0" width="220" height="170" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
-            <rect x="0" y="25" width="220" height="20" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
-            <text x="110" y="40" text-anchor="middle" font-size="11" font-weight="bold">Piston (Total Pat)</text>
-            
-            <circle cx="40" cy="80" r="3" fill="#1e293b"/><circle cx="70" cy="120" r="3" fill="#1e293b"/>
-            <circle cx="150" cy="90" r="3" fill="#1e293b"/><circle cx="180" cy="130" r="3" fill="#1e293b"/>
-            <text x="90" y="105" font-size="10" font-weight="bold">Pa (Dry Air)</text>
-            
-            <circle cx="100" cy="70" r="3" fill="#0284c7"/><circle cx="130" cy="140" r="3" fill="#0284c7"/>
-            <text x="120" y="150" font-size="10" font-weight="bold" fill="#0284c7">Pw (Vapour)</text>
+            <!-- Sealed Partition in Middle -->
+            <polygon id="comp-hp-part" points="390,95 415,112 415,212 390,195" fill="#334155" stroke="#0f172a" stroke-width="2.5"/>
+            <text x="402" y="80" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">SEALED PARTITION (密封隔板)</text>
 
-            <text x="110" y="200" text-anchor="middle" font-size="12" font-weight="bold">Pat = Pa + Pw</text>
-            <text x="110" y="220" text-anchor="middle" font-size="11" font-weight="bold">Diagram (a): Dalton's Law</text>
-          </g>
+            <!-- Finned Heat Pipes -->
+            <g id="comp-hp-tubes">
+              <line x1="170" y1="165" x2="600" y2="165" stroke="#0284c7" stroke-width="5"/>
+              <line x1="190" y1="190" x2="620" y2="190" stroke="#0284c7" stroke-width="5"/>
+              <text x="635" y="180" font-size="12" font-weight="bold" fill="#0284c7">Finned Heat Pipes</text>
+            </g>
 
-          <!-- DIAGRAM (b) -->
-          <g transform="translate(330, 20)">
-            <rect x="0" y="0" width="390" height="190" fill="#fafafa" stroke="#1e293b" stroke-width="1.5"/>
-            <path d="M 40,170 Q 110,120 220,30" fill="none" stroke="#1e293b" stroke-width="2.5"/>
-            <text x="130" y="55" font-size="9" font-weight="bold">Saturation Curve (100% RH)</text>
+            <!-- Counterflow Air Streams -->
+            <!-- Exhaust (Left side, Downwards) -->
+            <g id="comp-hp-exh">
+              <path d="M 270,30 L 270,200" stroke="#dc2626" stroke-width="3.5" marker-end="url(#arrow-red)"/>
+              <text x="270" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">HOT EXHAUST IN (熱廢氣進入)</text>
+              <text x="270" y="220" text-anchor="middle" font-size="12" font-weight="bold" fill="#ea580c">COOL EXHAUST OUT (冷卻廢氣排出)</text>
+            </g>
 
-            <line x1="170" y1="30" x2="170" y2="190" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
-            <text x="175" y="185" font-size="9" fill="#dc2626">1. Dry-bulb Temp (&theta;)</text>
-
-            <line x1="90" y1="50" x2="250" y2="170" stroke="#059669" stroke-width="1.5"/>
-            <text x="245" y="160" font-size="9" fill="#059669">2. Wet-bulb Temp (&theta;')</text>
-
-            <line x1="90" y1="135" x2="330" y2="135" stroke="#2563eb" stroke-width="1.5"/>
-            <text x="335" y="138" font-size="9" fill="#2563eb">3. Moisture Content (w)</text>
-
-            <line x1="130" y1="40" x2="310" y2="140" stroke="#d97706" stroke-width="1.5"/>
-            <text x="260" y="80" font-size="9" fill="#d97706">4. Enthalpy (h)</text>
-
-            <line x1="200" y1="180" x2="270" y2="40" stroke="#64748b" stroke-width="1.5"/>
-            <text x="275" y="50" font-size="9" fill="#64748b">5. Specific Volume (v)</text>
-
-            <path d="M 70,170 Q 140,130 260,50" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
-            <text x="265" y="65" font-size="9" fill="#7c3aed">6. RH Curve (%)</text>
-
-            <text x="195" y="220" text-anchor="middle" font-size="11" font-weight="bold">Diagram (b): Psychrometric Chart 6 Properties</text>
-          </g>
-        </svg>
-        <div class="diagram-caption">Figure 3 — Dalton's Law Cylinder Diagram (a) and Psychrometric Coordinate Scales Diagram (b)</div>
+            <!-- Supply (Right side, Upwards) -->
+            <g id="comp-hp-sup">
+              <path d="M 540,250 L 540,80" stroke="#2563eb" stroke-width="3.5" marker-end="url(#arrow-blue)"/>
+              <text x="540" y="265" text-anchor="middle" font-size="12" font-weight="bold" fill="#2563eb">COLD SUPPLY IN (冷新風進入)</text>
+              <text x="540" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#16a34a">WARM SUPPLY OUT (預熱新風送出)</text>
+            </g>
+          </svg>
+        </div>
+        <div class="legend-grid">
+          <div class="legend-item" onmouseenter="highlight('comp-hp-part')" onmouseleave="unhighlight('comp-hp-part')">① Sealed Partition (中央密封隔板，零交叉污染)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-hp-tubes')" onmouseleave="unhighlight('comp-hp-tubes')">② Finned Heat Pipes (抽真空毛細吸芯熱管)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-hp-exh')" onmouseleave="unhighlight('comp-hp-exh')">③ Hot Exhaust Stream (排氣降溫顯熱釋放)</div>
+          <div class="legend-item" onmouseenter="highlight('comp-hp-sup')" onmouseleave="unhighlight('comp-hp-sup')">④ Cold Supply Stream (新風吸熱預熱逆流佈置)</div>
+        </div>
       </div>
     </div>
 
-    <!-- Q4 PROCESS DIAGRAMS -->
+    <!-- FIG 2.2 -->
     <div class="card">
-      <div class="card-title">📐 Question 4 五個空氣處理過程獨立濕度圖樣板（對照 L03 原圖）</div>
-      
-      <div class="ref-tag">📖 官方出處：分別出自 L03 第 19, 20, 21, 22, 23 頁 Figure 1-4 至 1-8</div>
-      <div class="step-box">
-        <strong>✏️ Figure 4 畫圖核心方向口訣（千祈唔好畫錯箭頭）：</strong><br>
-        • <strong>(1) 冷卻除濕</strong>：點 1 在右上，箭頭<strong>向左下方斜</strong>指向點 2。<br>
-        • <strong>(2) 加熱加濕</strong>：1 &rarr; 2 <strong>水平向右</strong>（純加熱），2 &rarr; 3 <strong>向左上方斜</strong>（加濕）。<br>
-        • <strong>(3) 冷卻除濕＋再熱</strong>：1 &rarr; 2 <strong>向左下方斜</strong>，2 &rarr; 3 <strong>水平向右</strong>（純再熱）。<br>
-        • <strong>(4) 蒸發冷卻</strong>：點 1 在右下，箭頭<strong>沿濕球線向左上方移動</strong>指向點 2（逼近飽和線）。<br>
-        • <strong>(5) 空氣混合</strong>：回風點 1 與室外風點 o 連成一直線，混合點 m 位於線段中。
+      <div class="diagram-panel">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 2.2 — Enthalpy Wheel 3-D View (全熱交換蜂窩轉輪)</span>
+          <button class="btn-zoom" onclick="openModal('svg-fig22', 'Figure 2.2 — Enthalpy Wheel 3-D')">🔍 全螢幕放大</button>
+        </div>
+        <div class="svg-container" onclick="openModal('svg-fig22', 'Figure 2.2 — Enthalpy Wheel 3-D')">
+          <svg id="svg-fig22" viewBox="0 0 800 280" width="100%" height="280">
+            <!-- Ducts -->
+            <rect x="80" y="40" width="250" height="70" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,2"/>
+            <rect x="470" y="40" width="250" height="70" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,2"/>
+            <line x1="120" y1="75" x2="680" y2="75" stroke="#dc2626" stroke-width="3.5" marker-end="url(#arrow-red)"/>
+            <text x="140" y="65" font-size="11" font-weight="bold" fill="#dc2626">Warm Room Exhaust In</text>
+            <text x="610" y="65" font-size="11" font-weight="bold" fill="#ea580c">Cooled Exhaust Out</text>
+
+            <rect x="80" y="160" width="250" height="70" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,2"/>
+            <rect x="470" y="160" width="250" height="70" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,2"/>
+            <line x1="680" y1="195" x2="120" y2="195" stroke="#0284c7" stroke-width="3.5" marker-end="url(#arrow-blue)"/>
+            <text x="610" y="185" font-size="11" font-weight="bold" fill="#0284c7">Cold Outside Air In</text>
+            <text x="140" y="185" font-size="11" font-weight="bold" fill="#16a34a">Warmed Supply to Room</text>
+
+            <!-- Center Rotating Wheel (Isometric Ellipse) -->
+            <g id="comp-ew-wheel">
+              <ellipse cx="400" cy="135" rx="50" ry="100" fill="#f8fafc" stroke="#1e293b" stroke-width="3"/>
+              <ellipse cx="400" cy="135" rx="16" ry="32" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
+              <path d="M 400,35 Q 455,135 400,235" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <!-- Rotation Arrow -->
+              <path d="M 360,105 A 35 75 0 0 1 360,165" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#arrow-blue)"/>
+              <text x="295" y="140" font-size="11" font-weight="bold" fill="#d97706">Rotation (旋轉)</text>
+              <text x="400" y="255" text-anchor="middle" font-size="12" font-weight="bold">Rotating Honeycomb Matrix (顯熱+潛熱)</text>
+            </g>
+          </svg>
+        </div>
+        <div class="legend-grid">
+          <div class="legend-item" onmouseenter="highlight('comp-ew-wheel')" onmouseleave="unhighlight('comp-ew-wheel')">① Rotating Honeycomb Matrix (吸濕儲熱蜂窩轉輪)</div>
+          <div class="legend-item">② Upper Exhaust Air Ductwork (上層排風風道)</div>
+          <div class="legend-item">③ Lower Outdoor Supply Ductwork (下層新風風道)</div>
+          <div class="legend-item">④ Continuous Regeneration (連續旋轉能量再生)</div>
+        </div>
       </div>
+    </div>
 
-      <div class="diagram-container">
-        <svg viewBox="0 0 760 400" width="100%" height="400">
-          <!-- (1) -->
-          <g transform="translate(15, 15)">
-            <rect width="220" height="170" fill="#fafafa" stroke="#cbd5e1"/>
-            <path d="M 20,150 Q 60,110 120,30" fill="none" stroke="#94a3b8" stroke-width="2"/>
-            <line x1="160" y1="60" x2="80" y2="120" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-red)"/>
-            <circle cx="160" cy="60" r="3" fill="#dc2626"/><text x="170" y="60" font-size="10">1</text>
-            <circle cx="80" cy="120" r="3" fill="#dc2626"/><text x="70" y="135" font-size="10">2</text>
-            <text x="60" y="45" font-size="9" fill="#64748b">Coil surface &lt; Td</text>
-            <text x="110" y="160" text-anchor="middle" font-size="10" font-weight="bold">(1) Cooling + Dehum.</text>
-          </g>
+    <!-- FIG 3: DALTON & PSYCHROMETRIC CHART -->
+    <div class="card">
+      <div class="diagram-panel">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 3 — Diagram (a) Dalton's Law & Diagram (b) Psychrometric Chart 6 Properties</span>
+          <button class="btn-zoom" onclick="openModal('svg-fig3', 'Figure 3 — Dalton & Psychrometric Chart')">🔍 全螢幕放大</button>
+        </div>
+        <div class="svg-container" onclick="openModal('svg-fig3', 'Figure 3 — Dalton & Psychrometric Chart')">
+          <svg id="svg-fig3" viewBox="0 0 820 280" width="100%" height="280">
+            <!-- DIAGRAM (a) -->
+            <g transform="translate(30, 20)">
+              <rect x="0" y="0" width="240" height="180" fill="#f8fafc" stroke="#1e293b" stroke-width="2.5" rx="4"/>
+              <rect x="0" y="25" width="240" height="22" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+              <text x="120" y="41" text-anchor="middle" font-size="12" font-weight="bold">Piston (Total Atmospheric Pat)</text>
+              
+              <!-- Molecules -->
+              <circle cx="50" cy="85" r="4" fill="#1e293b"/><circle cx="90" cy="130" r="4" fill="#1e293b"/>
+              <circle cx="160" cy="95" r="4" fill="#1e293b"/><circle cx="195" cy="140" r="4" fill="#1e293b"/>
+              <text x="105" y="105" font-size="11" font-weight="bold">Pa (Dry Air)</text>
+              
+              <circle cx="110" cy="75" r="4" fill="#0284c7"/><circle cx="140" cy="150" r="4" fill="#0284c7"/>
+              <text x="135" y="165" font-size="11" font-weight="bold" fill="#0284c7">Pw (Water Vapour)</text>
 
-          <!-- (2) -->
-          <g transform="translate(270, 15)">
-            <rect width="220" height="170" fill="#fafafa" stroke="#cbd5e1"/>
-            <path d="M 20,150 Q 60,110 120,30" fill="none" stroke="#94a3b8" stroke-width="2"/>
-            <line x1="70" y1="120" x2="160" y2="120" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-red)"/>
-            <line x1="160" y1="120" x2="125" y2="65" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arr)"/>
-            <text x="60" y="125" font-size="10">1</text>
-            <text x="170" y="125" font-size="10">2</text>
-            <text x="130" y="55" font-size="10">3</text>
-            <text x="110" y="160" text-anchor="middle" font-size="10" font-weight="bold">(2) Heating + Humid.</text>
-          </g>
+              <text x="120" y="220" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Pat = Pa + Pw</text>
+              <text x="120" y="240" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">Diagram (a): Dalton's Law Cylinder</text>
+            </g>
 
-          <!-- (3) -->
-          <g transform="translate(525, 15)">
-            <rect width="220" height="170" fill="#fafafa" stroke="#cbd5e1"/>
-            <path d="M 20,150 Q 60,110 120,30" fill="none" stroke="#94a3b8" stroke-width="2"/>
-            <line x1="170" y1="60" x2="80" y2="120" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-red)"/>
-            <line x1="80" y1="120" x2="150" y2="120" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr)"/>
-            <text x="180" y="60" font-size="10">1</text>
-            <text x="70" y="135" font-size="10">2</text>
-            <text x="160" y="125" font-size="10">3</text>
-            <text x="110" y="160" text-anchor="middle" font-size="10" font-weight="bold">(3) Cool + Dehum + Reheat</text>
-          </g>
+            <!-- DIAGRAM (b) -->
+            <g transform="translate(350, 20)">
+              <rect x="0" y="0" width="440" height="200" fill="#fafafa" stroke="#1e293b" stroke-width="2" rx="4"/>
+              <!-- Saturation line -->
+              <path d="M 40,180 Q 120,130 250,30" fill="none" stroke="#1e293b" stroke-width="3"/>
+              <text x="150" y="55" font-size="10" font-weight="bold">Saturation Curve (100% RH)</text>
 
-          <!-- (4) -->
-          <g transform="translate(140, 205)">
-            <rect width="220" height="170" fill="#fafafa" stroke="#cbd5e1"/>
-            <path d="M 20,150 Q 60,110 120,30" fill="none" stroke="#94a3b8" stroke-width="2"/>
-            <line x1="180" y1="142" x2="60" y2="70" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5"/>
-            <text x="60" y="62" font-size="9" fill="#64748b">Constant wet-bulb line</text>
-            <line x1="160" y1="130" x2="85" y2="85" stroke="#059669" stroke-width="2.5" marker-end="url(#arr)"/>
-            <text x="170" y="135" font-size="10">1</text>
-            <text x="75" y="80" font-size="10">2</text>
-            <text x="110" y="160" text-anchor="middle" font-size="10" font-weight="bold">(4) Evaporative Cooling</text>
-          </g>
+              <!-- 1. Dry bulb -->
+              <line x1="190" y1="30" x2="190" y2="200" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+              <text x="195" y="195" font-size="10" font-weight="bold" fill="#dc2626">1. Dry-bulb (θ, °C)</text>
 
-          <!-- (5) -->
-          <g transform="translate(400, 205)">
-            <rect width="220" height="170" fill="#fafafa" stroke="#cbd5e1"/>
-            <path d="M 20,150 Q 60,110 120,30" fill="none" stroke="#94a3b8" stroke-width="2"/>
-            <line x1="60" y1="130" x2="170" y2="50" stroke="#7c3aed" stroke-width="2"/>
-            <circle cx="170" cy="50" r="3" fill="#7c3aed"/><text x="180" y="55" font-size="10">1 (Return)</text>
-            <circle cx="60" cy="130" r="3" fill="#7c3aed"/><text x="40" y="145" font-size="10">o (Outdoor)</text>
-            <circle cx="120" cy="86" r="4" fill="#dc2626"/>
-            <text x="130" y="86" font-size="10" font-weight="bold" fill="#dc2626">m</text>
-            <text x="110" y="160" text-anchor="middle" font-size="10" font-weight="bold">(5) Air Mixing Process</text>
-          </g>
-        </svg>
-        <div class="diagram-caption">Figure 4 — Five Air Conditioning Processes on Individual Psychrometric Charts</div>
+              <!-- 2. Wet bulb -->
+              <line x1="100" y1="55" x2="280" y2="180" stroke="#059669" stroke-width="2"/>
+              <text x="275" y="170" font-size="10" font-weight="bold" fill="#059669">2. Wet-bulb (θ', °C)</text>
+
+              <!-- 3. Moisture content -->
+              <line x1="100" y1="140" x2="380" y2="140" stroke="#2563eb" stroke-width="2"/>
+              <text x="385" y="143" font-size="10" font-weight="bold" fill="#2563eb">3. Moisture Content (w)</text>
+
+              <!-- 4. Enthalpy -->
+              <line x1="140" y1="40" x2="340" y2="145" stroke="#d97706" stroke-width="2"/>
+              <text x="290" y="85" font-size="10" font-weight="bold" fill="#d97706">4. Enthalpy (h)</text>
+
+              <!-- 5. Specific volume -->
+              <line x1="220" y1="190" x2="300" y2="40" stroke="#64748b" stroke-width="2"/>
+              <text x="305" y="50" font-size="10" font-weight="bold" fill="#64748b">5. Specific Volume (v)</text>
+
+              <!-- 6. Relative Humidity -->
+              <path d="M 80,180 Q 160,140 300,55" fill="none" stroke="#7c3aed" stroke-width="2"/>
+              <text x="305" y="70" font-size="10" font-weight="bold" fill="#7c3aed">6. RH Curve (%)</text>
+
+              <text x="220" y="240" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">Diagram (b): Psychrometric Chart 6 Properties</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 4: 5 AC PROCESSES -->
+    <div class="card">
+      <div class="diagram-panel">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 4 — Five Air Conditioning Processes on Psychrometric Charts (五大空氣過程)</span>
+          <button class="btn-zoom" onclick="openModal('svg-fig4', 'Figure 4 — Five Air Conditioning Processes')">🔍 全螢幕放大</button>
+        </div>
+        <div class="svg-container" onclick="openModal('svg-fig4', 'Figure 4 — Five Air Conditioning Processes')">
+          <svg id="svg-fig4" viewBox="0 0 840 430" width="100%" height="430">
+            <!-- (1) Cooling + Dehum -->
+            <g transform="translate(15, 15)">
+              <rect width="250" height="180" fill="#fafafa" stroke="#cbd5e1" rx="4"/>
+              <path d="M 25,160 Q 70,120 140,35" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+              <line x1="180" y1="65" x2="90" y2="135" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+              <circle cx="180" cy="65" r="4" fill="#dc2626"/><text x="192" y="65" font-size="11" font-weight="bold">1</text>
+              <circle cx="90" cy="135" r="4" fill="#dc2626"/><text x="75" y="150" font-size="11" font-weight="bold">2</text>
+              <text x="125" y="170" text-anchor="middle" font-size="11" font-weight="bold">(1) Cooling + Dehum. (向左下)</text>
+            </g>
+
+            <!-- (2) Heating + Humid -->
+            <g transform="translate(295, 15)">
+              <rect width="250" height="180" fill="#fafafa" stroke="#cbd5e1" rx="4"/>
+              <path d="M 25,160 Q 70,120 140,35" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+              <line x1="80" y1="130" x2="180" y2="130" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+              <line x1="180" y1="130" x2="140" y2="65" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-blue)"/>
+              <text x="68" y="135" font-size="11" font-weight="bold">1</text>
+              <text x="190" y="135" font-size="11" font-weight="bold">2</text>
+              <text x="145" y="55" font-size="11" font-weight="bold">3</text>
+              <text x="125" y="170" text-anchor="middle" font-size="11" font-weight="bold">(2) Heating (水平右) + Humid. (左上)</text>
+            </g>
+
+            <!-- (3) Cool + Dehum + Reheat -->
+            <g transform="translate(575, 15)">
+              <rect width="250" height="180" fill="#fafafa" stroke="#cbd5e1" rx="4"/>
+              <path d="M 25,160 Q 70,120 140,35" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+              <line x1="190" y1="65" x2="90" y2="135" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+              <line x1="90" y1="135" x2="170" y2="135" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+              <text x="202" y="65" font-size="11" font-weight="bold">1</text>
+              <text x="75" y="150" font-size="11" font-weight="bold">2</text>
+              <text x="180" y="140" font-size="11" font-weight="bold">3</text>
+              <text x="125" y="170" text-anchor="middle" font-size="11" font-weight="bold">(3) Cool + Dehum + Reheat (水平右)</text>
+            </g>
+
+            <!-- (4) Evaporative Cooling -->
+            <g transform="translate(155, 220)">
+              <rect width="250" height="180" fill="#fafafa" stroke="#cbd5e1" rx="4"/>
+              <path d="M 25,160 Q 70,120 140,35" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+              <line x1="200" y1="150" x2="70" y2="70" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <line x1="180" y1="138" x2="95" y2="85" stroke="#059669" stroke-width="3" marker-end="url(#arrow-blue)"/>
+              <text x="192" y="145" font-size="11" font-weight="bold">1</text>
+              <text x="85" y="80" font-size="11" font-weight="bold">2</text>
+              <text x="125" y="170" text-anchor="middle" font-size="11" font-weight="bold">(4) Evaporative Cooling (沿濕球線向左上)</text>
+            </g>
+
+            <!-- (5) Air Mixing -->
+            <g transform="translate(435, 220)">
+              <rect width="250" height="180" fill="#fafafa" stroke="#cbd5e1" rx="4"/>
+              <path d="M 25,160 Q 70,120 140,35" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+              <line x1="70" y1="140" x2="190" y2="55" stroke="#7c3aed" stroke-width="2.5"/>
+              <circle cx="190" cy="55" r="4" fill="#7c3aed"/><text x="202" y="55" font-size="11" font-weight="bold">1 (Return)</text>
+              <circle cx="70" cy="140" r="4" fill="#7c3aed"/><text x="45" y="155" font-size="11" font-weight="bold">o (Outdoor)</text>
+              <circle cx="135" cy="94" r="5" fill="#dc2626"/>
+              <text x="145" y="95" font-size="11" font-weight="bold" fill="#dc2626">m</text>
+              <text x="125" y="170" text-anchor="middle" font-size="11" font-weight="bold">(5) Air Mixing Process (直線連線中點)</text>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
 
   </div>
 
-  <!-- TAB 3: CHINESE STUDY & PITFALLS GUIDE -->
+  <!-- ==================== TAB 3: 中文速讀與避坑對照 ==================== -->
   <div id="tab-cn" class="tab-content">
 
     <div class="card">
-      <div class="card-title">💡 術語與公式大白話解讀（睇明佢就唔會驚）</div>
-      
-      <div class="explain-box">
-        <strong>1. P<sub>at</sub> = P<sub>a</sub> + P<sub>w</sub>（道爾頓分壓定律）</strong><br>
-        • <strong>P<sub>at</sub></strong>：大氣總壓力（Atmospheric Pressure）。<br>
-        • <strong>P<sub>a</sub></strong>：乾空氣自己產生的壓力（Air）。<br>
-        • <strong>P<sub>w</sub></strong>：水蒸氣自己產生的壓力（Water vapour）。<br>
-        👉 <strong>白話意思：</strong> 空氣由「乾空氣」同「水蒸氣」組成，總大氣壓就等於兩者各自壓力相加。
-      </div>
-
-      <div class="explain-box">
-        <strong>2. m<sup>3</sup>/kg da（比容 Specific Volume 的單位）</strong><br>
-        • <strong>m<sup>3</sup></strong>：立方米（體積）。<br>
-        • <strong>kg</strong>：公斤（重量）。<br>
-        • <strong>da</strong>：Dry Air（乾空氣）。<br>
-        👉 <strong>白話意思：</strong> 「每 1 公斤乾空氣，在空間中霸佔了多少立方米體積」。
-      </div>
-
-      <div class="explain-box">
-        <strong>3. &mu; = w / w<sub>s</sub>（飽和度 Degree of Saturation）</strong><br>
-        • <strong>&mu;</strong>：讀作 "mu"，代表飽和度。<br>
-        • <strong>w</strong>：現在空氣中實際含水量。<br>
-        • <strong>w<sub>s</sub></strong>：同溫度下，空氣極限最多能裝的水量（Saturated）。<br>
-        👉 <strong>白話意思：</strong> 好比水杯最多裝 100ml（w<sub>s</sub>），現在倒了 60ml（w），飽和度就是 60/100 = 0.6。
-      </div>
-
-      <div class="explain-box">
-        <strong>4. 點解純加熱是水平向右？</strong><br>
-        在濕度圖上，橫軸是溫度（越右越熱），縱軸是水分（越上越多水）。電暖爐純吹熱風，只升溫度（向右行），但完全無加水（高度不變），所以必然是<strong>「水平向右直線」</strong>。加濕有噴水，所以向上行。
-      </div>
-
-      <div class="explain-box">
-        <strong>5. E = (h<sub>3</sub> - h<sub>2</sub>) / (h<sub>s</sub> - h<sub>2</sub>)（噴水室加濕效率）</strong><br>
-        • (h<sub>3</sub> - h<sub>2</sub>)：實際增加的能量。<br>
-        • (h<sub>s</sub> - h<sub>2</sub>)：理論上最多可以增加的極限能量。<br>
-        👉 <strong>白話意思：</strong> 效率 ＝ 實際得到幾多 ÷ 理論極限最多可以得到幾多。
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🚨 MiniMax 原版答案致命錯誤檢視（防扣分清單）</div>
+      <div class="card-title">🚨 MiniMax 原版答案致命錯誤與防扣分清單</div>
       
       <div class="alert-box">
-        <strong>扣分死穴 1：Q1 重力回水系統誤加電動冷凝泵（Condensate Pump）</strong><br>
-        題目指明是 <em>Gravity Return（重力回水）</em>。重力回水純靠重力自然流回，<strong>絕對無泵</strong>！原答案在文字和圖中加入了 pump，直接違背工程定義。
+        <strong>扣分死穴 1：Q1 重力回水系統誤加電動冷凝水泵（Condensate Pump）</strong><br>
+        題目指明是 <em>Gravity Return（重力回水）</em>。重力回水純靠蒸氣自然上升及凝結水重力回流，<strong>完全無泵</strong>！原答案在文字和圖中加入了 pump，直接違背工程定義。
       </div>
 
       <div class="alert-box">
@@ -800,16 +881,117 @@
       </div>
     </div>
 
+    <div class="card">
+      <div class="card-title">💡 術語與公式大白話解讀（睇明佢就唔會驚）</div>
+      
+      <div class="explain-box">
+        <strong>1. P<sub>at</sub> = P<sub>a</sub> + P<sub>w</sub>（道爾頓分壓定律）</strong><br>
+        • <strong>P<sub>at</sub></strong>：大氣總壓力。<br>
+        • <strong>P<sub>a</sub></strong>：乾空氣自己產生的壓力。<br>
+        • <strong>P<sub>w</sub></strong>：水蒸氣自己產生的壓力。<br>
+        👉 <strong>白話意思：</strong> 空氣由乾空氣和水蒸氣組成，總大氣壓就等於兩者各自壓力相加。
+      </div>
+
+      <div class="explain-box">
+        <strong>2. m<sup>3</sup>/kg da（比容 Specific Volume 的單位）</strong><br>
+        • <strong>da</strong>：Dry Air（乾空氣）。<br>
+        👉 <strong>白話意思：</strong> 「每 1 公斤乾空氣，在空間中霸佔了多少立方米體積」。
+      </div>
+
+      <div class="explain-box">
+        <strong>3. &mu; = w / w<sub>s</sub>（飽和度 Degree of Saturation）</strong><br>
+        • <strong>w</strong>：現在空氣中實際含水量。<br>
+        • <strong>w<sub>s</sub></strong>：同溫度下，空氣極限最多能裝的水量。<br>
+        👉 <strong>白話意思：</strong> 水杯最多裝 100ml（w<sub>s</sub>），現在倒了 60ml（w），飽和度就是 60/100 = 0.6。
+      </div>
+
+      <div class="explain-box">
+        <strong>4. 點解純加熱是水平向右？</strong><br>
+        在濕度圖上，橫軸是溫度（越右越熱），縱軸是水分（越上越多水）。電暖爐純吹熱風，只升溫度（向右行），但完全無加水（高度不變），所以必然是<strong>「水平向右直線」</strong>。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Fullscreen Zoom Modal -->
+<div id="diagram-modal" class="modal" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-bar">
+      <span id="modal-title" style="font-weight:700;">高清工程圖放大檢視</span>
+      <button class="modal-close" onclick="closeModal()">關閉 ✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
   </div>
 </div>
 
 <script>
+  // 切換 Tab
   function showTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-    event.target.classList.add('active');
+    event.currentTarget.classList.add('active');
   }
+
+  // 切換「黑白臨摹描線模式」
+  function toggleTracingMode() {
+    document.body.classList.toggle('tracing-mode');
+    const btn = document.querySelector('.btn-toggle-trace');
+    if (document.body.classList.contains('tracing-mode')) {
+      btn.innerText = '🎨 切換回「彩色工程圖模式」';
+      btn.style.background = '#0f172a';
+      btn.style.color = '#ffffff';
+    } else {
+      btn.innerText = '✏️ 切換「黑白臨摹描線模式」';
+      btn.style.background = '#f59e0b';
+      btn.style.color = '#000000';
+    }
+  }
+
+  // 互動圖例高亮效果
+  function highlight(elementId) {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.style.filter = 'drop-shadow(0px 0px 6px #2563eb)';
+      el.style.stroke = '#2563eb';
+      el.style.strokeWidth = '4px';
+    }
+  }
+
+  function unhighlight(elementId) {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.style.filter = 'none';
+      el.style.stroke = '';
+      el.style.strokeWidth = '';
+    }
+  }
+
+  // 全螢幕放大檢視 Modal
+  function openModal(svgId, title) {
+    const originalSvg = document.getElementById(svgId);
+    if (!originalSvg) return;
+    const modal = document.getElementById('diagram-modal');
+    const modalBody = document.getElementById('modal-body');
+    const modalTitle = document.getElementById('modal-title');
+
+    modalTitle.innerText = title;
+    modalBody.innerHTML = '';
+    const clone = originalSvg.cloneNode(true);
+    clone.removeAttribute('id');
+    modalBody.appendChild(clone);
+    modal.classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('diagram-modal').classList.remove('active');
+  }
+
+  // 鍵盤 ESC 關閉 Modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
 </script>
 
 </body>
