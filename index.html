@@ -32,12 +32,12 @@
     header {
       background: linear-gradient(135deg, #1e3a8a, #0f172a);
       color: #ffffff;
-      padding: 30px;
+      padding: 26px 30px;
       border-radius: 12px;
       margin-bottom: 24px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-    header h1 { font-size: 1.8rem; margin-bottom: 6px; }
+    header h1 { font-size: 1.7rem; margin-bottom: 6px; }
     header p { opacity: 0.9; font-size: 0.95rem; }
     .badge {
       display: inline-block;
@@ -106,18 +106,9 @@
     h3 { font-size: 1.05rem; color: var(--heading); margin: 16px 0 8px 0; }
     p, li { margin-bottom: 8px; font-size: 0.93rem; }
     ul, ol { padding-left: 22px; }
-    .copy-block {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-left: 4px solid var(--accent);
-      padding: 14px 18px;
-      border-radius: 6px;
-      margin: 12px 0;
-      font-size: 0.92rem;
-    }
     .formula {
-      font-family: "Courier New", Courier, monospace;
-      font-weight: bold;
+      font-family: inherit;
+      font-weight: 600;
       background: #f1f5f9;
       color: #0369a1;
       padding: 4px 10px;
@@ -135,6 +126,16 @@
       margin: 14px 0;
       font-size: 0.9rem;
       color: #991b1b;
+    }
+    .explain-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 4px solid var(--success);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 14px 0;
+      font-size: 0.9rem;
+      color: #166534;
     }
     table {
       width: 100%;
@@ -186,14 +187,14 @@
 <div class="container">
   <header>
     <h1>PDEEEng Y1 — BSE Assignment ONE (September 2026)</h1>
-    <p>Space Heating, Energy Recovery & Psychrometrics | Complete 100-Mark Submission & Visual Guide</p>
-    <div class="badge">Authoritative Version: Checked Against Lectures 1–3 Notes</div>
+    <p>Space Heating, Energy Recovery & Psychrometrics | Complete Clean Submission & Visual Guide</p>
+    <div class="badge">100-Mark Standard | No Confusing Code Tags</div>
   </header>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('tab-en')">✍️ 英文手抄答案（精簡・照抄即交）</button>
+    <button class="tab-btn active" onclick="showTab('tab-en')">✍️ 英文手抄答案（排版乾淨・照抄即交）</button>
     <button class="tab-btn" onclick="showTab('tab-diag')">📐 全套手繪圖對照樣板（帶 Labels & Legends）</button>
-    <button class="tab-btn" onclick="showTab('tab-cn')">💡 中文溫習筆記與避坑對照</button>
+    <button class="tab-btn" onclick="showTab('tab-cn')">💡 中文溫習筆記與術語大白話解讀</button>
   </div>
 
   <!-- TAB 1: ENGLISH SUBMISSION SCRIPT -->
@@ -208,7 +209,7 @@
 
       <h3>1. Steam Heating System & Gravity Return</h3>
       <p>A steam heating system supplies heat to a space by connecting a source of steam through piping to heat-emitting equipment (radiators) in the space. The steam gives up its heat in the radiators and condenses into water (condensate).</p>
-      <p>In a gravity return system, steam rises by buoyancy and condensate drains back to the boiler by gravity alone <strong>without any mechanical pump</strong>.</p>
+      <p>In a gravity return system, steam rises naturally by buoyancy and condensate drains back to the boiler by gravity alone <strong>without any mechanical pump</strong>.</p>
 
       <h3>2. System Classification</h3>
       <p>There are <strong>two (2) common designs</strong> of low-pressure steam systems based on gravity return:</p>
@@ -224,18 +225,18 @@
 
       <h3>3. Operating Principles</h3>
       <ul>
-        <li><strong>Single-pipe gravity return system:</strong> A single pipe serves both steam supply and condensate return. Steam travels along the top of the pitched pipe while condensate flows back along the bottom in the opposite direction. Air vents must be installed at radiators and the end of the steam main to discharge trapped air.</li>
-        <li><strong>2-pipe gravity return system:</strong> Steam supply and condensate return are separated into two distinct mains. Radiators are connected in parallel; each unit receives steam via a supply riser and discharges condensate through a return drop. In a wet return, a check valve is provided near the boiler to prevent boiler water backflow.</li>
+        <li><strong>Single-pipe gravity return system:</strong> A single pipe serves both steam supply and condensate return. Steam travels along the top of the pitched pipe while condensate drains back along the bottom in the opposite direction. Air vents must be installed at radiators and the end of the steam main to discharge air.</li>
+        <li><strong>2-pipe gravity return system:</strong> Steam supply and condensate return are separated into two distinct mains. Radiators are connected in parallel; each unit receives steam via a supply riser and discharges condensate through a return drop. In a wet return, a check valve is provided near the boiler to prevent backflow.</li>
       </ul>
 
       <h3>4. Advantages & Disadvantages of Steam Systems</h3>
       <ul>
-        <li><strong>Advantages:</strong> Steam has a higher heat carrying capacity (sensible and latent) than water, making it suitable for long-distance transport; lower running cost due to large-scale generation.</li>
-        <li><strong>Disadvantages:</strong> Condensate disposal and air elimination from lengthy pipelines are the two major problems.</li>
+        <li><strong>Advantages:</strong> High heat carrying capacity (sensible and latent heat); suitable for long-distance transport; lower running cost due to large-scale production.</li>
+        <li><strong>Disadvantages:</strong> Disposal of condensate and elimination of air from lengthy pipelines are the two major problems.</li>
       </ul>
 
       <div class="hand-draw-note">
-        <strong>📌 手抄指引：</strong> 本題文字抄寫上述 4 點即可。抄完後請在下方預留位置，用手繪出 <strong>Figure 1.1（單管圖）</strong> 與 <strong>Figure 1.2（雙管圖）</strong>，圖樣請切換至第二個分頁「全套手繪圖對照樣板」參考。
+        <strong>📌 手抄指引：</strong> 本題文字抄寫上述 4 點即可。抄完後請在下方用手繪出 <strong>Figure 1.1（單管圖）</strong> 與 <strong>Figure 1.2（雙管圖）</strong>，圖樣請切換至第二個分頁「全套手繪圖對照樣板」參考。
       </div>
     </div>
 
@@ -254,7 +255,7 @@
 
       <h3>2. Device 1: Heat Pipe Heat Exchanger</h3>
       <ul>
-        <li><strong>Appearance & Construction (3-D):</strong> A rectangular casing housing an array of individual, permanently sealed finned tubes. A sealed partition plate separates the hot exhaust air stream and cold supply air stream in a counterflow arrangement, completely preventing cross-contamination.</li>
+        <li><strong>Appearance & Construction (3-D):</strong> A rectangular casing housing an array of individual, permanently sealed finned tubes. A sealed partition plate separates the hot exhaust air stream and cold supply air stream in a counterflow arrangement, preventing cross-contamination.</li>
         <li><strong>Working Principle:</strong> Operates on a closed-loop evaporation/condensation cycle. Heat from the hot exhaust vaporizes the liquid inside the pipe; higher vapour pressure drives vapour to the cooler end, where it condenses and releases latent heat to the cold supply air. Condensate returns via an internal capillary wick and gravity. No moving parts and no external power required.</li>
         <li><strong>Factors Affecting Capacity:</strong> Wick design, tube diameter (15–50 mm), working fluid properties, temperature difference, and inclination tilt angle.</li>
         <li><strong>Disadvantage:</strong> Transfers sensible heat only; cannot recover latent heat.</li>
@@ -282,26 +283,26 @@
 
       <h3>1. Dalton's Law</h3>
       <p>Dalton's law states that the total pressure of a gas mixture is equal to the sum of the partial pressures of the elements in the mixture which occupies a given volume at a given temperature:</p>
-      <div class="formula">P_m = P_1 + P_2 + P_3 + ... + P_n</div>
+      <div class="formula">P<sub>m</sub> = P<sub>1</sub> + P<sub>2</sub> + P<sub>3</sub> + ... + P<sub>n</sub></div>
       <p>Applying Dalton's law to moist air (mixture of dry air and water vapour):</p>
-      <div class="formula">P_at = P_a + P_w</div>
+      <div class="formula">P<sub>at</sub> = P<sub>a</sub> + P<sub>w</sub></div>
       <p>where: <br>
-      $P_{at}$ = atmospheric pressure of moist air (Pa)<br>
-      $P_a$ = partial pressure of dry air (Pa)<br>
-      $P_w$ = partial pressure of water vapour (Pa)</p>
+      P<sub>at</sub> = atmospheric pressure of moist air (Pa)<br>
+      P<sub>a</sub> = partial pressure of dry air (Pa)<br>
+      P<sub>w</sub> = partial pressure of water vapour (Pa)</p>
 
       <h3>2. Eleven (11) Properties of Moist Air</h3>
       <ol>
-        <li><strong>Humidity ratio (w):</strong> Ratio between the mass of water vapour $m_w$ and mass of dry air $m_a$:
-          <div class="formula">w = m_w / m_a = 0.62198 · P_w / (P_at - P_w) &nbsp; [kg/kg da]</div>
+        <li><strong>Humidity ratio (w):</strong> Ratio between the mass of water vapour m<sub>w</sub> and mass of dry air m<sub>a</sub>:
+          <div class="formula">w = m<sub>w</sub> / m<sub>a</sub> = 0.62198 · P<sub>w</sub> / (P<sub>at</sub> - P<sub>w</sub>) &nbsp; [kg/kg da]</div>
         </li>
         <li><strong>Dry bulb temperature (t):</strong> Temperature of moist air measured by a standard thermometer (°C).</li>
         <li><strong>Wet bulb temperature (t*):</strong> Temperature measured by a thermometer wrapped in a wetted wick exposed to an air current of 1–2 m/s (°C).</li>
-        <li><strong>Dew point temperature (t_d):</strong> Temperature at which condensation of moisture begins at constant pressure and humidity ratio (°C).</li>
+        <li><strong>Dew point temperature (t<sub>d</sub>):</strong> Temperature at which condensation of moisture begins at constant pressure and humidity ratio (°C).</li>
         <li><strong>Moisture content:</strong> Weight of water vapour in kg per kg of dry air (kg/kg da).</li>
         <li><strong>Relative humidity (&phi;):</strong> Ratio of actual water vapour partial pressure to saturated water vapour pressure at the same temperature (%).</li>
-        <li><strong>Degree of saturation (&mu;):</strong> Ratio of humidity ratio $w$ to saturated humidity ratio $w_s$ at the same temperature and pressure ($\mu = w/w_s$).</li>
-        <li><strong>Specific volume (v):</strong> Volume of moist air in $\text{m}^3$ per kg of dry air ($\text{m}^3/\text{kg da}$).</li>
+        <li><strong>Degree of saturation (&mu;):</strong> Ratio of humidity ratio w to saturated humidity ratio w<sub>s</sub> at the same temperature and pressure (&mu; = w / w<sub>s</sub>).</li>
+        <li><strong>Specific volume (v):</strong> Volume of moist air in m<sup>3</sup> per kg of dry air (m<sup>3</sup>/kg da).</li>
         <li><strong>Enthalpy (h):</strong> Amount of heat in moist air above an arbitrary datum (-17.8°C for dry air, 0°C water for vapour):
           <div class="formula">h = 1.005 t + w(2501 + 1.87 t) &nbsp; [kJ/kg]</div>
         </li>
@@ -319,7 +320,7 @@
         <li><strong>Wet-bulb temperature (&theta;'):</strong> Diagonal lines sloping downward to the right (°C).</li>
         <li><strong>Moisture content (g):</strong> Horizontal lines (right vertical axis, kg/kg da).</li>
         <li><strong>Specific enthalpy (h):</strong> Diagonal lines sloping upward to the left (kJ/kg).</li>
-        <li><strong>Specific volume (v):</strong> Steeply inclined lines leaning to the left ($\text{m}^3/\text{kg}$).</li>
+        <li><strong>Specific volume (v):</strong> Steeply inclined lines leaning to the left (m<sup>3</sup>/kg).</li>
         <li><strong>Relative humidity (H):</strong> Curved lines curving upward from the saturation curve (%).</li>
       </ol>
 
@@ -345,32 +346,32 @@
           </ul>
         </li>
       </ul>
-      <div class="formula">Bypass Factor = (t_o - t_s) / (t_m - t_s) = (h_o - h_s) / (h_m - h_s) = (w_o - w_s) / (w_m - w_s)</div>
-      <p>where: $t_m, h_m, w_m$ = entering mixing air; $t_o, h_o, w_o$ = off-coil condition; $t_s, h_s, w_s$ = apparatus dew point (ADP).</p>
+      <div class="formula">Bypass Factor = (t<sub>o</sub> - t<sub>s</sub>) / (t<sub>m</sub> - t<sub>s</sub>) = (h<sub>o</sub> - h<sub>s</sub>) / (h<sub>m</sub> - h<sub>s</sub>) = (w<sub>o</sub> - w<sub>s</sub>) / (w<sub>m</sub> - w<sub>s</sub>)</div>
+      <p>where: t<sub>m</sub>, h<sub>m</sub>, w<sub>m</sub> = entering mixing air; t<sub>o</sub>, h<sub>o</sub>, w<sub>o</sub> = off-coil condition; t<sub>s</sub>, h<sub>s</sub>, w<sub>s</sub> = apparatus dew point (ADP).</p>
 
       <h3>2. The Five (5) Air Conditioning Processes</h3>
       
       <p><strong>(1) Cooling vs. Dehumidification (Cooling + Dehumidification)</strong><br>
-      Sensible cooling alone is represented by a horizontal line moving left ($w$ constant), whereas pure dehumidification is a vertical downward line ($t$ constant). In practical air conditioning, air passes over a cooling coil whose surface temperature is below the entering dew point ($T_d$); hence sensible cooling and dehumidification occur simultaneously. Dry bulb temperature ($t$), moisture content ($w$), and enthalpy ($h$) are all reduced.<br>
-      <em>Line on Chart:</em> Straight line sloping <strong>downwards and to the left ($1 \to 2$)</strong> towards the saturation curve.</p>
+      Sensible cooling alone is represented by a horizontal line moving left (w constant), whereas pure dehumidification is a vertical downward line (t constant). In practical cooling coil operation, air is cooled below its dew point (T<sub>d</sub>); therefore sensible cooling and dehumidification occur simultaneously. Dry bulb temperature (t), moisture content (w), and enthalpy (h) are all reduced.<br>
+      <em>Line on Chart:</em> Straight line sloping <strong>downwards and to the left (1 &rarr; 2)</strong> towards the saturation curve.</p>
 
       <p><strong>(2) Heating vs. Humidification (Heating + Humidification)</strong><br>
-      Sensible heating alone is a horizontal line moving right ($w$ constant, $t$ and $h$ increase). Humidification adds moisture to the air. In a combined process ($1 \to 2 \to 3$), air is first heated sensibly from $T_1$ to $T_2$ ($1 \to 2$), then humidified via steam or water spray ($2 \to 3$). Spray chamber effectiveness: $E = (h_3 - h_2) / (h_s - h_2)$.<br>
-      <em>Line on Chart:</em> $1 \to 2$ is <strong>horizontal to the right</strong>; $2 \to 3$ slopes <strong>upwards and to the left</strong> towards saturation.</p>
+      Sensible heating alone is a horizontal line moving right (w constant, t and h increase). Humidification adds moisture to the air stream. In a combined heating and humidification process, air is first heated sensibly from T<sub>1</sub> to T<sub>2</sub> (1 &rarr; 2), then humidified via steam or water spray (2 &rarr; 3). Spray chamber effectiveness: E = (h<sub>3</sub> - h<sub>2</sub>) / (h<sub>s</sub> - h<sub>2</sub>).<br>
+      <em>Line on Chart:</em> 1 &rarr; 2 is <strong>horizontal to the right</strong>; 2 &rarr; 3 slopes <strong>upwards and to the left</strong> towards saturation.</p>
 
       <p><strong>(3) Cooling + Dehumidification + Reheat</strong><br>
-      Air is first cooled and dehumidified below its dew point ($1 \to 2$) to extract excess moisture, and then sensibly reheated ($2 \to 3$) to a comfortable supply air temperature without changing moisture content. Prevents room overcooling while maintaining comfort humidity.<br>
-      <em>Line on Chart:</em> $1 \to 2$ slopes <strong>downwards and to the left</strong>; $2 \to 3$ is <strong>strictly horizontal to the right</strong> ($w$ constant).</p>
+      Air is first cooled and dehumidified below its dew point (1 &rarr; 2) to remove excess moisture, and then sensibly reheated (2 &rarr; 3) to a comfortable supply air temperature without changing moisture content. This avoids overcooling while maintaining comfort room humidity.<br>
+      <em>Line on Chart:</em> 1 &rarr; 2 slopes <strong>downwards and to the left</strong>; 2 &rarr; 3 is <strong>strictly horizontal to the right</strong> (w constant).</p>
 
       <p><strong>(4) Evaporative Cooling</strong><br>
       Simultaneous removal of sensible heat and addition of moisture. The recirculated spray water remains at constant temperature along the wet-bulb temperature line without external heat addition or extraction (also called "Ideal Adiabatic Saturation Process").<br>
-      <em>Line on Chart:</em> Moves <strong>upwards and to the left along the constant wet-bulb / enthalpy line ($1 \to 2$)</strong> towards the saturation curve ($t$ decreases, $w$ increases).</p>
+      <em>Line on Chart:</em> Moves <strong>upwards and to the left along the constant wet-bulb / enthalpy line (1 &rarr; 2)</strong> towards the saturation curve (t decreases, w increases).</p>
 
       <p><strong>(5) Air Mixing Process</strong><br>
-      Return air ($1$) and outdoor fresh air ($o$) mix adiabatically in the mixing chamber of the AHU. The resulting mixing point ($m$) always lies on the straight line connecting $1$ and $o$.<br>
+      Return air (1) and outdoor fresh air (o) mix adiabatically in the mixing chamber of the AHU. The resulting mixing point (m) always lies on the straight line connecting 1 and o.<br>
       <span class="formula">% of re-circulation air = x / y</span> &nbsp; | &nbsp; 
       <span class="formula">% of outdoor air = (y - x) / y</span><br>
-      <em>Line on Chart:</em> A <strong>straight line joining point $1$ and point $o$</strong>, with mixing point $m$ located on the segment.</p>
+      <em>Line on Chart:</em> A <strong>straight line joining point 1 and point o</strong>, with mixing point m located on the line segment.</p>
     </div>
 
   </div>
@@ -437,7 +438,6 @@
           <text x="530" y="184" font-size="10">2. Water Line</text>
           <text x="530" y="200" font-size="10">3. Single Steam Main (with fall)</text>
           <text x="530" y="216" font-size="10">4. Radiators & Automatic Air Vents</text>
-          <text x="30" y="112" font-size="10" fill="#64748b">5. Steam main pitched back to boiler (gravity flow, no pump)</text>
         </svg>
         <div class="diagram-caption">Figure 1.1 — Single-pipe Gravity Return Low-Pressure Steam System</div>
       </div>
@@ -534,30 +534,26 @@
       <div class="diagram-container">
         <svg viewBox="0 0 760 270" width="100%" height="270">
           <!-- Ducts Left & Right -->
-          <!-- Upper duct: Exhaust -->
           <rect x="80" y="40" width="240" height="70" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
           <rect x="440" y="40" width="240" height="70" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
           <line x1="120" y1="75" x2="640" y2="75" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-red)"/>
           <text x="140" y="65" font-size="11" font-weight="bold" fill="#dc2626">Warm Exhaust Air In</text>
           <text x="580" y="65" font-size="11" font-weight="bold" fill="#ea580c">Cooled Exhaust Out</text>
 
-          <!-- Lower duct: Supply -->
           <rect x="80" y="150" width="240" height="70" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3"/>
           <rect x="440" y="150" width="240" height="70" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="3"/>
           <line x1="640" y1="185" x2="120" y2="185" stroke="#0284c7" stroke-width="3" marker-end="url(#arr)"/>
           <text x="580" y="175" font-size="11" font-weight="bold" fill="#0284c7">Cold Outside Air In</text>
           <text x="140" y="175" font-size="11" font-weight="bold" fill="#16a34a">Warmed Supply to Room</text>
 
-          <!-- Center Rotating Wheel (Isometric Ellipse) -->
+          <!-- Center Rotating Wheel -->
           <ellipse cx="380" cy="130" rx="45" ry="95" fill="#f8fafc" stroke="#1e293b" stroke-width="3"/>
           <ellipse cx="380" cy="130" rx="15" ry="30" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
           <path d="M 380,35 Q 430,130 380,225" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2"/>
           
-          <!-- Rotation Arrow -->
           <path d="M 345,100 A 30 70 0 0 1 345,160" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#arr)"/>
           <text x="290" y="135" font-size="10" font-weight="bold" fill="#d97706">Rotation</text>
-          <text x="455" y="120" font-size="10" font-weight="bold" fill="#d97706">Purge Section</text>
-          <text x="380" y="245" text-anchor="middle" font-size="11" font-weight="bold">Rotating Honeycomb Matrix (stores sensible + latent heat)</text>
+          <text x="380" y="245" text-anchor="middle" font-size="11" font-weight="bold">Rotating Honeycomb Matrix (Sensible + Latent)</text>
         </svg>
         <div class="diagram-caption">Figure 2.2 — 3-D Schematic of Enthalpy Wheel (Heat Recovery Wheel) in Counterflow Ducts</div>
       </div>
@@ -575,7 +571,6 @@
             <rect x="0" y="25" width="220" height="20" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
             <text x="110" y="40" text-anchor="middle" font-size="11" font-weight="bold">Piston (Total Pat)</text>
             
-            <!-- Molecules -->
             <circle cx="40" cy="80" r="3" fill="#1e293b"/><circle cx="70" cy="120" r="3" fill="#1e293b"/>
             <circle cx="150" cy="90" r="3" fill="#1e293b"/><circle cx="180" cy="130" r="3" fill="#1e293b"/>
             <text x="90" y="105" font-size="10" font-weight="bold">Pa (Dry Air)</text>
@@ -590,38 +585,31 @@
           <!-- DIAGRAM (b) -->
           <g transform="translate(330, 20)">
             <rect x="0" y="0" width="390" height="190" fill="#fafafa" stroke="#1e293b" stroke-width="1.5"/>
-            <!-- Saturation Line -->
             <path d="M 40,170 Q 110,120 220,30" fill="none" stroke="#1e293b" stroke-width="2.5"/>
             <text x="130" y="55" font-size="9" font-weight="bold">Saturation Curve (100% RH)</text>
 
-            <!-- 1. Dry Bulb -->
             <line x1="170" y1="30" x2="170" y2="190" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
             <text x="175" y="185" font-size="9" fill="#dc2626">1. Dry-bulb Temp (&theta;)</text>
 
-            <!-- 2. Wet Bulb -->
             <line x1="90" y1="50" x2="250" y2="170" stroke="#059669" stroke-width="1.5"/>
             <text x="245" y="160" font-size="9" fill="#059669">2. Wet-bulb Temp (&theta;')</text>
 
-            <!-- 3. Moisture Content -->
             <line x1="90" y1="135" x2="330" y2="135" stroke="#2563eb" stroke-width="1.5"/>
             <text x="335" y="138" font-size="9" fill="#2563eb">3. Moisture Content (w)</text>
 
-            <!-- 4. Enthalpy -->
             <line x1="130" y1="40" x2="310" y2="140" stroke="#d97706" stroke-width="1.5"/>
             <text x="260" y="80" font-size="9" fill="#d97706">4. Enthalpy (h)</text>
 
-            <!-- 5. Specific Volume -->
             <line x1="200" y1="180" x2="270" y2="40" stroke="#64748b" stroke-width="1.5"/>
             <text x="275" y="50" font-size="9" fill="#64748b">5. Specific Volume (v)</text>
 
-            <!-- 6. Relative Humidity -->
             <path d="M 70,170 Q 140,130 260,50" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
             <text x="265" y="65" font-size="9" fill="#7c3aed">6. RH Curve (%)</text>
 
             <text x="195" y="220" text-anchor="middle" font-size="11" font-weight="bold">Diagram (b): Psychrometric Chart 6 Properties</text>
           </g>
         </svg>
-        <div class="diagram-caption">Figure 3 — Dalton's Law Moist Air Cylinder Diagram (a) and Psychrometric Coordinate Scales Diagram (b)</div>
+        <div class="diagram-caption">Figure 3 — Dalton's Law Cylinder Diagram (a) and Psychrometric Coordinate Scales Diagram (b)</div>
       </div>
     </div>
 
@@ -638,7 +626,6 @@
             <line x1="160" y1="60" x2="80" y2="120" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-red)"/>
             <circle cx="160" cy="60" r="3" fill="#dc2626"/><text x="170" y="60" font-size="10">1</text>
             <circle cx="80" cy="120" r="3" fill="#dc2626"/><text x="70" y="135" font-size="10">2</text>
-            <text x="60" y="45" font-size="9" fill="#64748b">Coil surface &lt; Td</text>
             <text x="110" y="160" text-anchor="middle" font-size="10" font-weight="bold">(1) Cooling + Dehum.</text>
           </g>
 
@@ -670,9 +657,6 @@
           <g transform="translate(140, 205)">
             <rect width="220" height="170" fill="#fafafa" stroke="#cbd5e1"/>
             <path d="M 20,150 Q 60,110 120,30" fill="none" stroke="#94a3b8" stroke-width="2"/>
-            <!-- Up-left along WB line -->
-            <line x1="180" y1="142" x2="60" y2="70" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5"/>
-            <text x="60" y="62" font-size="9" fill="#64748b">Constant wet-bulb line</text>
             <line x1="160" y1="130" x2="85" y2="85" stroke="#059669" stroke-width="2.5" marker-end="url(#arr)"/>
             <text x="170" y="135" font-size="10">1</text>
             <text x="75" y="80" font-size="10">2</text>
@@ -701,37 +685,67 @@
   <div id="tab-cn" class="tab-content">
 
     <div class="card">
-      <div class="card-title">🚨 MiniMax 原版答案致命錯誤與防扣分清單</div>
+      <div class="card-title">💡 術語與公式大白話解讀（睇明佢就唔會驚）</div>
       
-      <div class="alert-box">
-        <strong>扣分死穴 1：Q1 重力回水系統誤加電動冷凝泵（Condensate Pump）</strong><br>
-        題目明確指明是 <em>Gravity Return（重力回水）</em>。依據 Lecture 1 第 10–13 頁，重力回水純靠蒸氣浮力上升及凝結水重力回流，<strong>完全無泵</strong>！原答案在文字和圖中加入了 pump，直接違背工程定義。已在 Figure 1.1 及 1.2 中徹底修正。
+      <div class="explain-box">
+        <strong>1. P<sub>at</sub> = P<sub>a</sub> + P<sub>w</sub>（道爾頓分壓定律）</strong><br>
+        • <strong>P<sub>at</sub></strong>：大氣總壓力（Atmospheric Pressure）。<br>
+        • <strong>P<sub>a</sub></strong>：乾空氣自己產生的壓力（Air）。<br>
+        • <strong>P<sub>w</sub></strong>：水蒸氣自己產生的壓力（Water vapour）。<br>
+        👉 <strong>白話意思：</strong> 空氣由「乾空氣」同「水蒸氣」組成，總大氣壓就等於兩者各自壓力相加。
       </div>
 
-      <div class="alert-box">
-        <strong>扣分死穴 2：Q4(2) 加熱過程方向畫成垂直向上</strong><br>
-        在心理濕度圖上，垂直向上是「等溫加濕」。<strong>加熱是乾球溫度升高、含濕量不變，必須水平向右 ($1 \to 2$)</strong>！
+      <div class="explain-box">
+        <strong>2. m<sup>3</sup>/kg da（比容 Specific Volume 的單位）</strong><br>
+        • <strong>m<sup>3</sup></strong>：立方米（體積）。<br>
+        • <strong>kg</strong>：公斤（重量）。<br>
+        • <strong>da</strong>：Dry Air（乾空氣）。<br>
+        👉 <strong>白話意思：</strong> 「每 1 公斤乾空氣，在空間中霸佔了多少立方米體積」。
       </div>
 
-      <div class="alert-box">
-        <strong>扣分死穴 3：Q4(3) 再熱（Reheat）方向畫成垂直向上</strong><br>
-        再熱純粹是顯熱升溫，水分含量 $w$ 保持不變，<strong>必須是水平向右 ($2 \to 3$)</strong>。
+      <div class="explain-box">
+        <strong>3. &mu; = w / w<sub>s</sub>（飽和度 Degree of Saturation）</strong><br>
+        • <strong>&mu;</strong>：讀作 "mu"，代表飽和度。<br>
+        • <strong>w</strong>：現在空氣中實際含水量。<br>
+        • <strong>w<sub>s</sub></strong>：同溫度下，空氣極限最多能裝的水量（Saturated）。<br>
+        👉 <strong>白話意思：</strong> 好比水杯最多裝 100ml（w<sub>s</sub>），現在倒了 60ml（w），飽和度就是 60/100 = 0.6。
       </div>
 
-      <div class="alert-box">
-        <strong>扣分死穴 4：Q4(4) 蒸發冷卻箭頭完全反向</strong><br>
-        原答案將蒸發冷卻畫向右下角（變成了加熱去濕）。蒸發冷卻是溫度下降、含濕量增加，<strong>箭頭必須沿濕球線向左上方靠近飽和線</strong>！
+      <div class="explain-box">
+        <strong>4. 點解純加熱是水平向右？</strong><br>
+        在濕度圖上，橫軸是溫度（越右越熱），縱軸是水分（越上越多水）。電暖爐純吹熱風，只升溫度（向右行），但完全無加水（高度不變），所以必然是<strong>「水平向右直線」</strong>。加濕有噴水，所以向上行。
+      </div>
+
+      <div class="explain-box">
+        <strong>5. E = (h<sub>3</sub> - h<sub>2</sub>) / (h<sub>s</sub> - h<sub>2</sub>)（噴水室加濕效率）</strong><br>
+        • (h<sub>3</sub> - h<sub>2</sub>)：實際增加的能量。<br>
+        • (h<sub>s</sub> - h<sub>2</sub>)：理論上最多可以增加的極限能量。<br>
+        👉 <strong>白話意思：</strong> 效率 ＝ 實際得到幾多 ÷ 理論極限最多可以得到幾多。
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">💡 核心技術重點速記口訣</div>
-      <ul>
-        <li><strong>Q1 蒸氣供暖：</strong> 常用 2 種設計（單管 Single-pipe、雙管 2-pipe）；雙管回水管分 Dry return（水位線以上）與 Wet return（水位線以下，需裝 Check valve）。蒸氣輸熱能力大，但有「排空氣」與「排凝結水」兩大難題。</li>
-        <li><strong>Q2 節能 vs 回收：</strong> Saving 是「買高效設備減少浪費」；Recovery 是「捕獲排走廢熱循環利用」。Heat Pipe 零動件、零交叉污染、只傳顯熱；Enthalpy Wheel 蜂窩轉輪傳顯熱+潛熱，效率達 70–90%。</li>
-        <li><strong>Q3 道爾頓定律：</strong> 總壓等於各分壓之和 ($P_{at} = P_a + P_w$)。濕度圖 6 大線：乾球（底軸垂直線）、濕球（右下斜）、含濕量（右軸水平線）、焓（左上斜）、比容（陡斜線）、相對濕度（向上彎弧線）。</li>
-        <li><strong>Q4 旁通因子 (BF)：</strong> 盤管面積少 &rarr; BF 增加；風速慢 &rarr; 接觸時間長 &rarr; BF 減少。</li>
-      </ul>
+      <div class="card-title">🚨 MiniMax 原版答案致命錯誤檢視（防扣分清單）</div>
+      
+      <div class="alert-box">
+        <strong>扣分死穴 1：Q1 重力回水系統誤加電動冷凝泵（Condensate Pump）</strong><br>
+        題目指明是 <em>Gravity Return（重力回水）</em>。重力回水純靠重力自然流回，<strong>絕對無泵</strong>！原答案在文字和圖中加入了 pump，直接違背工程定義。
+      </div>
+
+      <div class="alert-box">
+        <strong>扣分死穴 2：Q4(2) 加熱過程方向畫成垂直向上</strong><br>
+        在心理濕度圖上，垂直向上是「等溫加濕」。加熱是乾球溫度升高、水分不變，<strong>必須水平向右 (1 &rarr; 2)</strong>！
+      </div>
+
+      <div class="alert-box">
+        <strong>扣分死穴 3：Q4(3) 再熱（Reheat）方向畫成垂直向上</strong><br>
+        再熱純粹是顯熱升溫，水分含量保持不變，<strong>必須是水平向右 (2 &rarr; 3)</strong>。
+      </div>
+
+      <div class="alert-box">
+        <strong>扣分死穴 4：Q4(4) 蒸發冷卻箭頭完全反向</strong><br>
+        蒸發冷卻是溫度下降、含濕量增加，<strong>箭頭必須沿濕球線向左上方靠近飽和線</strong>！原答案畫向右下角完全顛倒。
+      </div>
     </div>
 
   </div>
